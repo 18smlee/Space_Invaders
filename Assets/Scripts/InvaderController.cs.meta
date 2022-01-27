@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 1f5bba11ff1cf764bbc60edca35b36ee
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - boundingBox: {fileID: 745340053353944223, guid: 33e770d6d8ce34b44ad075b3edfe6984,
+      type: 3}
+  - SpawnStart: {fileID: 7694109358633128307, guid: b9f7e95e7762c14499a7b7f82f657e35,
+      type: 3}
+  - SpawnEnd: {fileID: 1479873566588939017, guid: 61b0fdc65eb79094cb150c22b146a9c2,
+      type: 3}
+  - highInvader: {fileID: 2627029701984697220, guid: 16f03bed4338b754da7f75761ea9e96c,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
