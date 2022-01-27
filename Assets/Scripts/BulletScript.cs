@@ -6,9 +6,10 @@ public class BulletScript : MonoBehaviour
     public Quaternion heading;
     void OnCollisionEnter(Collision collision)
     {
-        // the Collision contains a lot of info, but it’s the colliding
-        // object we’re most interested in.
+        // the Collision contains a lot of info, but itï¿½s the colliding
+        // object weï¿½re most interested in.
         Collider collider = collision.collider;
+        Debug.Log("I am a gameobject " + collider.gameObject);
         if (collider.CompareTag("Invader"))
         {
             Invader invader = collider.gameObject.GetComponent<Invader>();

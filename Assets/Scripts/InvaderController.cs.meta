@@ -10,7 +10,11 @@ MonoImporter:
       type: 3}
   - SpawnEnd: {fileID: 1479873566588939017, guid: 61b0fdc65eb79094cb150c22b146a9c2,
       type: 3}
-  - highInvader: {fileID: 2627029701984697220, guid: 16f03bed4338b754da7f75761ea9e96c,
+  - highInvader: {fileID: 4643310135070821264, guid: d0c9a9eb927f3bc469d37d590847b5fe,
+      type: 3}
+  - midInvader: {fileID: 3574244719826037327, guid: 1966fe4ddeaed3441b91b2c49588d507,
+      type: 3}
+  - lowInvader: {fileID: 549697003091739545, guid: 0032f9d3cece0d842b8421ecefe41c77,
       type: 3}
   executionOrder: 0
   icon: {instanceID: 0}

@@ -8,13 +8,15 @@ public class InvaderController : MonoBehaviour
     public GameObject SpawnStart;
     public GameObject SpawnEnd;
     public GameObject highInvader;
+    public GameObject midInvader;
+    public GameObject lowInvader;
 
     public Vector3 originInScreenCoords;
 
     // Start is called before the first frame update
     void Start()
     {
-        int numRows = 3;
+        int numRows = 5;
         int numCols = 11;
         Vector3 spawnStart = SpawnStart.transform.position;
         Vector3 spawnEnd = SpawnEnd.transform.position;
@@ -25,18 +27,31 @@ public class InvaderController : MonoBehaviour
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols; col++) {
                  
-                // float horizontalPos = Random.Range(SpawnStart.transform.position.x, SpawnEnd.transform.position.x);
-                // float verticalPos = Random.Range(SpawnStart.transform.position.z, SpawnEnd.transform.position.z);
+                float xPos = spawnStart.x + col * colSpace + colSpace / 2.0f;
+                float zPos = spawnStart.z - row * rowSpace - rowSpace / 2.0f;
 
-                float xPos = spawnStart.x + col * colSpace;
-                float zPos = spawnStart.z + row * rowSpace;
-                Debug.Log("row : " + row + " col : " + col + " x : " + xPos + " z : " + zPos);
-
-                Instantiate(
+                if (row == 0) {
+                    Instantiate(
                         highInvader, 
                         new Vector3(xPos, spawnStart.y, zPos),
                         Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
-        }
+                }
+
+                if (row == 1 || row == 2) {
+                    Instantiate(
+                        midInvader, 
+                        new Vector3(xPos, spawnStart.y, zPos),
+                        Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                }
+
+                if (row == 3 || row == 4) {
+                    Instantiate(
+                        lowInvader, 
+                        new Vector3(xPos, spawnStart.y, zPos),
+                        Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                }
+            }
+               
         }
         
         // float xSpace = (SpawnEnd.transform.position.x - SpawnStart.transform.position.x) / numEachInvader;
