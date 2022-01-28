@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: {x: 0, y: 0, z: 0}
   heading: {x: 0, y: 0, z: 0, w: 0}
+  cam: {fileID: 5710623185749258678, guid: 2bbe68e08bf99a546961f731fc2ac811, type: 3}
 --- !u!54 &-6536539733248311871
 Rigidbody:
   m_ObjectHideFlags: 0

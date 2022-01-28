@@ -4,17 +4,20 @@ public class BulletScript : MonoBehaviour
 {
     public Vector3 thrust;
     public Quaternion heading;
+    public GameObject cam;
     Global globalScript;
+
+    public bool hitsShip;
 
     void OnTriggerEnter(Collider collider) 
     {
         if (collider.CompareTag("Ship"))
         {
-            Debug.Log("hit ship");
             Destroy(gameObject);
             Ship ship = collider.gameObject.GetComponent<Ship>();
-            Debug.Log(ship == null);
             ship.getsHit();
+            hitsShip = true;
+            Debug.Log(hitsShip + "-----------------------------------------------------------------");
             globalScript.loseLife();
         }
         else if (collider.CompareTag("Invader"))
@@ -33,7 +36,7 @@ public class BulletScript : MonoBehaviour
         {
             // if we collided with something else, print to console
             // what the other thing was
-            Debug.Log("Collided with " + collider.tag);
+            // Debug.Log("Collided with " + collider.tag);
         }
     }
 
@@ -41,6 +44,7 @@ public class BulletScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        hitsShip = false;
         globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
         // travel straight in the z-axis
         thrust.z = 400.0f;
@@ -54,6 +58,5 @@ public class BulletScript : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    { //Physics engine handles movement, empty for now.
-    }
+    {}
 }

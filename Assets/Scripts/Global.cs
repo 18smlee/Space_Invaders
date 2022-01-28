@@ -33,6 +33,9 @@ public class Global : MonoBehaviour
     public void loseLife()
     {
         numLives -= 1;
-        Debug.Log("You now have " + numLives + " lives left");
+        Debug.Log("camera should be shaking now");
+        // camera shake
+        CameraShake camShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
+        StartCoroutine(camShake.Shake(0.15f, 0.4f));
     }
 }

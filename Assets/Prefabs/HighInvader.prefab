@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9437bac8b88df0d43b2f28e4648b953c, type: 2}
+  - {fileID: 2100000, guid: b9d0d787a9d80fb46b34ee9bfc438936, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,11 +111,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointValue: 30
+  row: 0
   rotation: 0
   deathExplosion: {fileID: 3460713223719996648, guid: 94ba570385b44b64db5fe594b29ded84,
     type: 3}
   deathKnell: {fileID: 8300000, guid: 571cdb3e4a970b8489445ff17d5f7a0c, type: 3}
   bullet: {fileID: 7827519291156076616, guid: 6b70593691d60c94e9665b7bd8868d26, type: 3}
+  globalScript: {fileID: 0}
+  invaderControllerScript: {fileID: 0}
 --- !u!54 &-6725432279755786204
 Rigidbody:
   m_ObjectHideFlags: 0

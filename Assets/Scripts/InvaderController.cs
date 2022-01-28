@@ -105,7 +105,6 @@ public class InvaderController : MonoBehaviour
             for (int j = 0; j < invaderRows[i].Count(); j++) {
                 if (invaderRows[i][j] == null) {
                     invaderRows[i].Remove(invaderRows[i][j]);
-                    Debug.Log("row " + i + " has " + invaderRows[i].Count + " invaders left");
                 }
             }
         }
