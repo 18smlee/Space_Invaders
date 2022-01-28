@@ -112,9 +112,7 @@ public class InvaderController : MonoBehaviour
         }
 
         timer += Time.deltaTime;
-
         var rand = new System.Random();
-
         if (timer > shootInterval) {
             timer = 0;
             int lastRow = invaderRows.Count() - 1;
@@ -122,7 +120,7 @@ public class InvaderController : MonoBehaviour
             int randomInvader = rand.Next(invaderRows[lastRow].Count);
             invaderRows[lastRow][randomInvader].GetComponent<Invader>().Shoot();
         }
-        
+
         // Player wins if all invaders are eliminated
         if (invaderRows.Count() == 0) {
             globalScript.win();

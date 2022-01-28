@@ -8,6 +8,8 @@ public class Ship : MonoBehaviour
     public float rotation;
     public GameObject bullet;
     public GameObject boundingBox;
+    public GameObject deathExplosion;
+    public AudioClip deathKnell;
     // Use this for initialization
     void Start()
     {
@@ -37,11 +39,16 @@ public class Ship : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
-            Vector3 spawnPos = gameObject.transform.position + new Vector3(0, 0, 1f);
+            Vector3 spawnPos = gameObject.transform.position + new Vector3(0, 0, 1.1f);
             GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
             BulletScript b = obj.GetComponent<BulletScript>();
             Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
             b.heading = rot;
         }
+    }
+
+    public void getsHit() {
+        AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
+        Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
     }
 }

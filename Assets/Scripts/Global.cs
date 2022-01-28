@@ -13,7 +13,12 @@ public class Global : MonoBehaviour
         score = 0;
     }
     void Update()
-    {}
+    {
+        // player loses if they lose all of their lives
+        if (numLives <= 0) {
+            lose();
+        }
+    }
 
     public void win()
     {

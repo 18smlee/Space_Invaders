@@ -4,12 +4,20 @@ public class BulletScript : MonoBehaviour
 {
     public Vector3 thrust;
     public Quaternion heading;
-    void OnCollisionEnter(Collision collision)
+    Global globalScript;
+
+    void OnTriggerEnter(Collider collider) 
     {
-        // the Collision contains a lot of info, but it�s the colliding
-        // object we�re most interested in.
-        Collider collider = collision.collider;
-        if (collider.CompareTag("Invader"))
+        if (collider.CompareTag("Ship"))
+        {
+            Debug.Log("hit ship");
+            Destroy(gameObject);
+            Ship ship = collider.gameObject.GetComponent<Ship>();
+            Debug.Log(ship == null);
+            ship.getsHit();
+            globalScript.loseLife();
+        }
+        else if (collider.CompareTag("Invader"))
         {
             Invader invader = collider.gameObject.GetComponent<Invader>();
             invader.Die();
@@ -23,9 +31,11 @@ public class BulletScript : MonoBehaviour
         }
     }
 
+
     // Use this for initialization
     void Start()
     {
+        globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
         // travel straight in the z-axis
         thrust.z = 400.0f;
         // do not passively decelerate

@@ -271,7 +271,7 @@ BoxCollider:
   m_GameObject: {fileID: 534559297}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -356,6 +356,9 @@ MonoBehaviour:
   rotation: 0
   bullet: {fileID: 7827519291156076616, guid: 6b70593691d60c94e9665b7bd8868d26, type: 3}
   boundingBox: {fileID: 273180916}
+  deathExplosion: {fileID: 3460713223719996648, guid: 94ba570385b44b64db5fe594b29ded84,
+    type: 3}
+  deathKnell: {fileID: 8300000, guid: 571cdb3e4a970b8489445ff17d5f7a0c, type: 3}
 --- !u!1 &675271405
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +409,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f698b020879ee64eab6d7c1171821c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalObj: {fileID: 0}
+  scoreText: {fileID: 0}
+  livesText: {fileID: 0}
 --- !u!114 &675271408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,6 +757,32 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaDirect: 0.5
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
+--- !u!1 &1298539270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6084447731699009864, guid: 5cca5193e660651448041f89dd1a9633,
+    type: 3}
+  m_PrefabInstance: {fileID: 1813143665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1298539271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298539270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c1c773473799642a7ebf4f6f7abbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrustSpeed: 0
+  rotation: 0
+  bullet: {fileID: 7827519291156076616, guid: 6b70593691d60c94e9665b7bd8868d26, type: 3}
+  boundingBox: {fileID: 745340053353944223, guid: 33e770d6d8ce34b44ad075b3edfe6984,
+    type: 3}
+  deathExplosion: {fileID: 3460713223719996648, guid: 94ba570385b44b64db5fe594b29ded84,
+    type: 3}
+  deathKnell: {fileID: 8300000, guid: 571cdb3e4a970b8489445ff17d5f7a0c, type: 3}
 --- !u!1 &1557993352
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +796,7 @@ GameObject:
   - component: {fileID: 1557993354}
   - component: {fileID: 1557993356}
   m_Layer: 5
-  m_Name: ScoreObject
+  m_Name: LifeObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -786,7 +818,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -350, y: 144.7}
+  m_AnchoredPosition: {x: -350, y: -152}
   m_SizeDelta: {x: 144.55, y: 21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1557993354
@@ -822,7 +854,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Test
+  m_Text: Lives Left
 --- !u!222 &1557993355
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -840,7 +872,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1557993352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f698b020879ee64eab6d7c1171821c0, type: 3}
+  m_Script: {fileID: 11500000, guid: fe398bdd4b586f142ad00f378748e4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1813143665
@@ -850,6 +882,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 534559301}
     m_Modifications:
+    - target: {fileID: 4916758366110457020, guid: 5cca5193e660651448041f89dd1a9633,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4916758366110457020, guid: 5cca5193e660651448041f89dd1a9633,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6084447731699009864, guid: 5cca5193e660651448041f89dd1a9633,
         type: 3}
       propertyPath: m_Name
@@ -873,7 +915,7 @@ PrefabInstance:
     - target: {fileID: 6862250347137176562, guid: 5cca5193e660651448041f89dd1a9633,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.74
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6862250347137176562, guid: 5cca5193e660651448041f89dd1a9633,
         type: 3}

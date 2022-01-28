@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class scoreUI : MonoBehaviour
+public class livesUI : MonoBehaviour
 {
     Global globalObj;
-    Text scoreText;
+    Text livesText;
     // Use this for initialization
     void Start()
     {
         GameObject g = GameObject.Find("GlobalObject");
         globalObj = g.GetComponent<Global>();
-        scoreText = gameObject.GetComponent<Text>();
+        livesText = gameObject.GetComponent<Text>();
     }
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = globalObj.score.ToString();
+        livesText.text = globalObj.numLives.ToString();
     }
 }

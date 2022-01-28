@@ -43,10 +43,8 @@ public class Invader : MonoBehaviour
     }
 
     // If an invader collides with the ship, player loses
-    public virtual void OnCollisionEnter(Collision collision)
+    public virtual void OnTriggerEnter(Collider collider)
     {
-        
-        Collider collider = collision.collider;
         if (collider.CompareTag("Ship")) {
             Debug.Log("Invader has collided with ship");
             globalScript.lose();
