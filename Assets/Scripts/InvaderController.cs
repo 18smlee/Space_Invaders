@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Collections;
 using UnityEngine;
 public class InvaderController : MonoBehaviour
 {
@@ -19,17 +20,20 @@ public class InvaderController : MonoBehaviour
     public GameObject midInvader;
     public GameObject lowInvader;
 
-    public List<GameObject> invaderList;
+    public Dictionary<int, int> rowStates;
     public float invaderSpeed;
     
     // Win lose state
-    public Global global;
-
+    Global globalScript;
     
     // Start is called before the first frame update
     void Start()
     {
-        invaderList = new List<GameObject>();
+        globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
+
+        // initialize dictionary to keep track of how many invaders are left in each row
+        rowStates = new Dictionary<int, int>();
+
         invaderSpeed = 0.01f;
 
         Vector3 spawnStart = SpawnStart.transform.position;
@@ -49,7 +53,7 @@ public class InvaderController : MonoBehaviour
                                                         new Vector3(xPos, spawnStart.y, zPos),
                                                         Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
                     myNewHighInvader.transform.parent = gameObject.transform;
-                    invaderList.Add(myNewHighInvader);
+                    myNewHighInvader.GetComponent<HighInvader>().setRow(row);
                 }
 
                 if (row == 1 || row == 2) {
@@ -57,7 +61,7 @@ public class InvaderController : MonoBehaviour
                                                         new Vector3(xPos, spawnStart.y, zPos),
                                                         Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
                     myNewMidInvader.transform.parent = gameObject.transform;
-                    invaderList.Add(myNewMidInvader);
+                    myNewMidInvader.GetComponent<HighInvader>().setRow(row);
                 }
 
                 if (row == 3 || row == 4) {
@@ -65,9 +69,10 @@ public class InvaderController : MonoBehaviour
                                                         new Vector3(xPos, spawnStart.y, zPos),
                                                         Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
                     myNewLowInvader.transform.parent = gameObject.transform;
-                    invaderList.Add(myNewLowInvader);
+                    myNewLowInvader.GetComponent<HighInvader>().setRow(row);
                 }
             }
+            rowStates[row] = numCols;
         }
     }
 
@@ -83,11 +88,10 @@ public class InvaderController : MonoBehaviour
             gameObject.transform.position = new Vector3(invaderControllerPos.x, invaderControllerPos.y, invaderControllerPos.z - 0.5f * colSpace);
         }
         gameObject.transform.Translate(invaderSpeed, 0, 0);
-        invaderList.RemoveAll(i => i == null);
-        
+
         // Player wins if all invaders are eliminated
-        if (!invaderList.Any()) {
-            global.win();
+        if (rowStates.Count == 0) {
+            globalScript.win();
         }
     }
 

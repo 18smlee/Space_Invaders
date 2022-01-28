@@ -37,17 +37,9 @@ public class Ship : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
-            Debug.Log("Fire! ");
-            /* we don�t want to spawn a Bullet inside our ship, so some
-            Simple trigonometry is done here to spawn the bullet
-            at the tip of where the ship is pointed.
-            */
             Vector3 spawnPos = gameObject.transform.position + new Vector3(0, 0, 1f);
-            // instantiate the Bullet
             GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
-            // get the Bullet Script Component of the new Bullet instance
             BulletScript b = obj.GetComponent<BulletScript>();
-            // set the direction the Bullet will travel in
             Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
             b.heading = rot;
         }

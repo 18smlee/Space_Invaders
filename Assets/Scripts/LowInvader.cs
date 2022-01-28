@@ -16,4 +16,10 @@ public class LowInvader : Invader
     {
         base.Update();
     }
+
+     public override void setRow(int rowIn)
+    {
+        base.setRow(rowIn);
+    }
+    
 }

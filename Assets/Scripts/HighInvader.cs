@@ -21,4 +21,9 @@ public class HighInvader : Invader
     {
         base.OnCollisionEnter(collision);
     }
+
+    public override void setRow(int rowIn)
+    {
+        base.setRow(rowIn);
+    }
 }
