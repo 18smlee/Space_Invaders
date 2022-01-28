@@ -22,6 +22,8 @@ public class InvaderController : MonoBehaviour
 
     public List<List<GameObject>> invaderRows;
     public float invaderSpeed;
+    public float timer;
+    public float shootInterval;
     
     // Win lose state
     Global globalScript;
@@ -29,6 +31,8 @@ public class InvaderController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timer = 0;
+        shootInterval = 3.0f;
         numRows = 5;
         numCols = 11;
         globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
@@ -86,6 +90,7 @@ public class InvaderController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         // Moves the block of invaders
         Vector3 invaderControllerPos = gameObject.transform.position;
         // Had to hardcode positions because bounding box not working here
@@ -106,6 +111,18 @@ public class InvaderController : MonoBehaviour
             }
         }
 
+        timer += Time.deltaTime;
+
+        var rand = new System.Random();
+
+        if (timer > shootInterval) {
+            timer = 0;
+            int lastRow = invaderRows.Count() - 1;
+            // Randomly choose one invader from the last row to shoot
+            int randomInvader = rand.Next(invaderRows[lastRow].Count);
+            invaderRows[lastRow][randomInvader].GetComponent<Invader>().Shoot();
+        }
+        
         // Player wins if all invaders are eliminated
         if (invaderRows.Count() == 0) {
             globalScript.win();

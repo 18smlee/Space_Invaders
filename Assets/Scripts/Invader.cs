@@ -55,6 +55,7 @@ public class Invader : MonoBehaviour
 
     public void Shoot()
     {
+        Debug.Log("I am shooting");
         Vector3 spawnPos = gameObject.transform.position + new Vector3(0, 0, -1f);
         GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
         BulletScript b = obj.GetComponent<BulletScript>();
