@@ -23,6 +23,12 @@ public class BulletScript : MonoBehaviour
             invader.Die();
             Destroy(gameObject);
         }
+        else if (collider.CompareTag("BarricadeCube"))
+        {
+            BarricadeCube cube = collider.gameObject.GetComponent<BarricadeCube>();
+            cube.Die();
+            Destroy(gameObject);
+        }
         else
         {
             // if we collided with something else, print to console

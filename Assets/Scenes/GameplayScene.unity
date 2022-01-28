@@ -123,6 +123,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &138126538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 138126539}
+  - component: {fileID: 138126540}
+  m_Layer: 0
+  m_Name: BarricadeController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &138126539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138126538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &138126540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138126538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363939fe6555c7841a97ae7d5bbd0f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barricade: {fileID: 8803206462358058276, guid: 1ca01e65e7845a142b77d4f86dbcdf8a,
+    type: 3}
+  boundingBox: {fileID: 273180916}
+  numBarricades: 4
+  barricadeSpace: 0
 --- !u!114 &156518571 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 725389242060403707, guid: 69970681c3ed174469c0f2f943394d13,
@@ -409,9 +457,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f698b020879ee64eab6d7c1171821c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalObj: {fileID: 0}
-  scoreText: {fileID: 0}
-  livesText: {fileID: 0}
 --- !u!114 &675271408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1219,6 +1264,11 @@ PrefabInstance:
         type: 3}
       propertyPath: numRows
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2257203829915969231, guid: 592e2cfaf0e10504b8a45415f5b42451,
+        type: 3}
+      propertyPath: invaderSpeed
+      value: 0.005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 592e2cfaf0e10504b8a45415f5b42451, type: 3}

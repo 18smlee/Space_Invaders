@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Linq;
-using System.Collections;
 using UnityEngine;
 public class InvaderController : MonoBehaviour
 {
@@ -40,7 +39,7 @@ public class InvaderController : MonoBehaviour
         // initialize array of rows, with each row containing an invader
         invaderRows = new List<List<GameObject>>();
 
-        invaderSpeed = 0.01f;
+        invaderSpeed = 0.005f;
 
         Vector3 spawnStart = SpawnStart.transform.position;
         Vector3 spawnEnd = SpawnEnd.transform.position;

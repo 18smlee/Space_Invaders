@@ -9,6 +9,8 @@ TagManager:
   - Invader
   - Bounding Box
   - Ship
+  - Barricade
+  - BarricadeCube
   layers:
   - Default
   - TransparentFX
