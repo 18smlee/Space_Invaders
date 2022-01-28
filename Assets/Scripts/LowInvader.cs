@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,9 +14,7 @@ public class LowInvader : Invader
 
     // Update is called once per frame
     public override void Update()
-    {
-        base.Update();
-    }
+    {}
 
      public override void setRow(int rowIn)
     {

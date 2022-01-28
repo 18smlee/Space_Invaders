@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,16 +14,9 @@ public class HighInvader : Invader
 
     // Update is called once per frame
     public override void Update()
-    {
-        base.Update();
-    }
+    {}
 
-    public override void OnCollisionEnter(Collision collision)
-    {
-        base.OnCollisionEnter(collision);
-    }
-
-    public override void setRow(int rowIn)
+     public override void setRow(int rowIn)
     {
         base.setRow(rowIn);
     }

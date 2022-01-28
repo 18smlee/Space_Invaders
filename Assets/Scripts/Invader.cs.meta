@@ -4,13 +4,11 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - globalObject: {fileID: 725389242060403705, guid: 69970681c3ed174469c0f2f943394d13,
-      type: 3}
-  - invaderControllerObject: {fileID: 2257203829915969216, guid: 592e2cfaf0e10504b8a45415f5b42451,
-      type: 3}
   - deathExplosion: {fileID: 3460713223719996648, guid: 94ba570385b44b64db5fe594b29ded84,
       type: 3}
   - deathKnell: {fileID: 8300000, guid: 571cdb3e4a970b8489445ff17d5f7a0c, type: 3}
+  - bullet: {fileID: 7827519291156076616, guid: 6b70593691d60c94e9665b7bd8868d26,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

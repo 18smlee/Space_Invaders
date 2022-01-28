@@ -10,8 +10,8 @@ public class InvaderController : MonoBehaviour
     public GameObject boundingBox;
     public GameObject SpawnStart;
     public GameObject SpawnEnd;
-    public int numRows = 1;
-    public int numCols = 11;
+    public int numRows;
+    public int numCols;
     float rowSpace;
     float colSpace;
     
@@ -20,7 +20,7 @@ public class InvaderController : MonoBehaviour
     public GameObject midInvader;
     public GameObject lowInvader;
 
-    public Dictionary<int, int> rowStates;
+    public List<List<GameObject>> invaderRows;
     public float invaderSpeed;
     
     // Win lose state
@@ -29,10 +29,12 @@ public class InvaderController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        numRows = 5;
+        numCols = 11;
         globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
 
-        // initialize dictionary to keep track of how many invaders are left in each row
-        rowStates = new Dictionary<int, int>();
+        // initialize array of rows, with each row containing an invader
+        invaderRows = new List<List<GameObject>>();
 
         invaderSpeed = 0.01f;
 
@@ -43,6 +45,9 @@ public class InvaderController : MonoBehaviour
         colSpace = Math.Abs(spawnEnd.x - spawnStart.x) / numCols;
 
         for (int row = 0; row < numRows; row++) {
+
+            List<GameObject> invadersInRow =  new List<GameObject>();
+
             for (int col = 0; col < numCols; col++) {
                  
                 float xPos = spawnStart.x + col * colSpace + colSpace / 2.0f;
@@ -53,7 +58,7 @@ public class InvaderController : MonoBehaviour
                                                         new Vector3(xPos, spawnStart.y, zPos),
                                                         Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
                     myNewHighInvader.transform.parent = gameObject.transform;
-                    myNewHighInvader.GetComponent<HighInvader>().setRow(row);
+                    invadersInRow.Add(myNewHighInvader);
                 }
 
                 if (row == 1 || row == 2) {
@@ -61,7 +66,8 @@ public class InvaderController : MonoBehaviour
                                                         new Vector3(xPos, spawnStart.y, zPos),
                                                         Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
                     myNewMidInvader.transform.parent = gameObject.transform;
-                    myNewMidInvader.GetComponent<HighInvader>().setRow(row);
+                    myNewMidInvader.GetComponent<MidInvader>().setRow(row);
+                    invadersInRow.Add(myNewMidInvader);
                 }
 
                 if (row == 3 || row == 4) {
@@ -69,10 +75,11 @@ public class InvaderController : MonoBehaviour
                                                         new Vector3(xPos, spawnStart.y, zPos),
                                                         Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
                     myNewLowInvader.transform.parent = gameObject.transform;
-                    myNewLowInvader.GetComponent<HighInvader>().setRow(row);
+                    myNewLowInvader.GetComponent<LowInvader>().setRow(row);
+                    invadersInRow.Add(myNewLowInvader);
                 }
             }
-            rowStates[row] = numCols;
+            invaderRows.Add(invadersInRow);
         }
     }
 
@@ -89,8 +96,18 @@ public class InvaderController : MonoBehaviour
         }
         gameObject.transform.Translate(invaderSpeed, 0, 0);
 
+        // Remove invaders that have been destroyed
+        for (int i = 0; i < invaderRows.Count(); i++) {
+            for (int j = 0; j < invaderRows[i].Count(); j++) {
+                if (invaderRows[i][j] == null) {
+                    invaderRows[i].Remove(invaderRows[i][j]);
+                    Debug.Log("row " + i + " has " + invaderRows[i].Count + " invaders left");
+                }
+            }
+        }
+
         // Player wins if all invaders are eliminated
-        if (rowStates.Count == 0) {
+        if (invaderRows.Count() == 0) {
             globalScript.win();
         }
     }
