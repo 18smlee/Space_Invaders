@@ -16,4 +16,9 @@ public class HighInvader : Invader
     {
         base.Update();
     }
+
+    public override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+    }
 }

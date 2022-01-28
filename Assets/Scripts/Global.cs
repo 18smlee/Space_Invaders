@@ -1,40 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class Global : MonoBehaviour
 {
-    public GameObject objToSpawn;
-    public float timer;
-    public float spawnPeriod;
-    public int numberSpawnedEachPeriod;
-    public Vector3 originInScreenCoords;
     public int score;
+    public int numLives;
     // Use this for initialization
     void Start()
     {
+        numLives = 3;
         score = 0;
-        timer = 0;
-        spawnPeriod = 5.0f;
-        numberSpawnedEachPeriod = 3;
-        originInScreenCoords = Camera.main.WorldToScreenPoint(new Vector3(0, 0, 0));
     }
     void Update()
+    {}
+
+    public void win()
     {
-        // timer += Time.deltaTime;
-        // if (timer > spawnPeriod)
-        // {
-        //     timer = 0;
-        //     float width = Screen.width;
-        //     float height = Screen.height;
-        //     for (int i = 0; i < numberSpawnedEachPeriod; i++)
-        //     {
-        //         float horizontalPos = Random.Range(0.0f, width);
-        //         float verticalPos = Random.Range(0.0f, height);
-        //         Instantiate(
-        //             objToSpawn, 
-        //             Camera.main.ScreenToWorldPoint(new Vector3(horizontalPos,verticalPos, originInScreenCoords.z)),
-        //             Quaternion.identity);
-        //     }
-        // }
+        SceneManager.LoadScene("WinScene");;
+    }
+
+    public void lose()
+    {
+        SceneManager.LoadScene("LoseScene");;
+    }
+
+    public void loseLife()
+    {
+        numLives -= 1;
+        Debug.Log("You now have " + numLives + " lives left");
     }
 }
