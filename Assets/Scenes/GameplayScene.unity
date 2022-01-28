@@ -574,6 +574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 956804681}
   - component: {fileID: 956804680}
+  - component: {fileID: 956804683}
   m_Layer: 0
   m_Name: InvaderController
   m_TagString: Untagged
@@ -603,7 +604,7 @@ MonoBehaviour:
     type: 3}
   lowInvader: {fileID: 549697003091739545, guid: 0032f9d3cece0d842b8421ecefe41c77,
     type: 3}
-  originInScreenCoords: {x: 0, y: 0, z: 0}
+  invaderSpeed: 0
 --- !u!4 &956804681
 Transform:
   m_ObjectHideFlags: 0
@@ -620,6 +621,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &956804683
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956804679}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1052,7 @@ PrefabInstance:
     - target: {fileID: 745340053353944222, guid: 33e770d6d8ce34b44ad075b3edfe6984,
         type: 3}
       propertyPath: m_Size.x
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 745340053353944222, guid: 33e770d6d8ce34b44ad075b3edfe6984,
         type: 3}
@@ -1097,7 +1111,7 @@ PrefabInstance:
     - target: {fileID: 1479873566588939016, guid: 61b0fdc65eb79094cb150c22b146a9c2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1479873566588939016, guid: 61b0fdc65eb79094cb150c22b146a9c2,
         type: 3}
@@ -1171,7 +1185,7 @@ PrefabInstance:
     - target: {fileID: 7694109358633128308, guid: b9f7e95e7762c14499a7b7f82f657e35,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 9.02
       objectReference: {fileID: 0}
     - target: {fileID: 7694109358633128308, guid: b9f7e95e7762c14499a7b7f82f657e35,
         type: 3}

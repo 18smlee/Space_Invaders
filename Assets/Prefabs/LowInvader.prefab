@@ -110,7 +110,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointValue: 10
-  speed: 0
+  baseSpeed: 0
+  boundingBox: {fileID: 745340053353944223, guid: 33e770d6d8ce34b44ad075b3edfe6984,
+    type: 3}
+  spawnStart: {fileID: 7694109358633128307, guid: b9f7e95e7762c14499a7b7f82f657e35,
+    type: 3}
+  spawnEnd: {fileID: 1479873566588939017, guid: 61b0fdc65eb79094cb150c22b146a9c2,
+    type: 3}
   deathExplosion: {fileID: 3460713223719996648, guid: 94ba570385b44b64db5fe594b29ded84,
     type: 3}
   deathKnell: {fileID: 8300000, guid: 571cdb3e4a970b8489445ff17d5f7a0c, type: 3}

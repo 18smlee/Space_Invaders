@@ -10,12 +10,13 @@ public class InvaderController : MonoBehaviour
     public GameObject highInvader;
     public GameObject midInvader;
     public GameObject lowInvader;
+    public float invaderSpeed;
 
-    public Vector3 originInScreenCoords;
-
+    
     // Start is called before the first frame update
     void Start()
     {
+        invaderSpeed = 0.01f;
         int numRows = 5;
         int numCols = 11;
         Vector3 spawnStart = SpawnStart.transform.position;
@@ -31,50 +32,38 @@ public class InvaderController : MonoBehaviour
                 float zPos = spawnStart.z - row * rowSpace - rowSpace / 2.0f;
 
                 if (row == 0) {
-                    Instantiate(
-                        highInvader, 
-                        new Vector3(xPos, spawnStart.y, zPos),
-                        Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                    var myNewHighInvader = Instantiate( highInvader, 
+                                                        new Vector3(xPos, spawnStart.y, zPos),
+                                                        Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                    myNewHighInvader.transform.parent = gameObject.transform;
                 }
 
                 if (row == 1 || row == 2) {
-                    Instantiate(
-                        midInvader, 
-                        new Vector3(xPos, spawnStart.y, zPos),
-                        Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                    var myNewMidInvader =  Instantiate(midInvader, 
+                                                        new Vector3(xPos, spawnStart.y, zPos),
+                                                        Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                    myNewMidInvader.transform.parent = gameObject.transform;
                 }
 
                 if (row == 3 || row == 4) {
-                    Instantiate(
-                        lowInvader, 
-                        new Vector3(xPos, spawnStart.y, zPos),
-                        Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                    var myNewLowInvader = Instantiate( lowInvader,
+                                                        new Vector3(xPos, spawnStart.y, zPos),
+                                                        Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                    myNewLowInvader.transform.parent = gameObject.transform;
                 }
             }
-               
         }
-        
-        // float xSpace = (SpawnEnd.transform.position.x - SpawnStart.transform.position.x) / numEachInvader;
-        // float zSpace = (SpawnStart.transform.position.z - SpawnEnd.transform.position.z) / 3;
-
-        // for (int row = 0; row < 1; row++) {
-        //     for (int col = 0; col < numEachInvader; col++) {
-                
-        //         Vector3 invaderPos = new Vector3(col * xSpace, SpawnStart.transform.position.y, row * zSpace);
-        //         Debug.Log("x coordinate " + invaderPos.x);
-        //         Debug.Log("z coordinate " + invaderPos.z);
-
-        //         Instantiate(
-        //             highInvader,
-        //             Camera.main.ScreenToWorldPoint(invaderPos),
-        //             Quaternion.identity);
-        //     }
-        // }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Had to hardcode positions because bounding box not working here
+        BoxCollider boxCollider = boundingBox.GetComponent<BoxCollider>();
+        if (gameObject.transform.position.x  > 10.0f || gameObject.transform.position.x < -10.0f) {
+            invaderSpeed = -invaderSpeed;
+        }
+        gameObject.transform.Translate(invaderSpeed, 0, 0);
         
     }
 
@@ -91,16 +80,5 @@ public class InvaderController : MonoBehaviour
         Gizmos.DrawLine(bottomLeftCorner, endPos);
         Gizmos.DrawLine(startPos, bottomLeftCorner);
 
-        var startPos_box = this.boundingBox.transform.position;
-        var endPos_box = this.boundingBox.transform.position;
-        var topRightCorner_box = new Vector3(endPos_box.x, endPos_box.y, startPos_box.z);
-        var bottomLeftCorner_box = new Vector3(startPos_box.x, endPos_box.y, endPos_box.z);
-        var originalColor = Gizmos.color;
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(startPos_box, topRightCorner_box);
-        Gizmos.DrawLine(topRightCorner_box, endPos_box);
-        Gizmos.DrawLine(bottomLeftCorner_box, endPos_box);
-        Gizmos.DrawLine(startPos_box, bottomLeftCorner_box);
-        Gizmos.color = originalColor;
     }
 }

@@ -9,7 +9,6 @@ public class BulletScript : MonoBehaviour
         // the Collision contains a lot of info, but it�s the colliding
         // object we�re most interested in.
         Collider collider = collision.collider;
-        Debug.Log("I am a gameobject " + collider.gameObject);
         if (collider.CompareTag("Invader"))
         {
             Invader invader = collider.gameObject.GetComponent<Invader>();

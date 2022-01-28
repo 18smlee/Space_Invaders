@@ -5,14 +5,15 @@ using UnityEngine;
 public class MidInvader : Invader
 {
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         pointValue = 20;
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        gameObject.transform.Translate(base.speed, 0, 0);
+        base.Update();
     }
 }

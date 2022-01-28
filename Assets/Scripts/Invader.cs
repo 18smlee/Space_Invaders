@@ -5,18 +5,18 @@ using UnityEngine;
 public class Invader : MonoBehaviour
 {
     public int pointValue;
-    public float speed;
+    public float baseSpeed; 
+    public GameObject boundingBox;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
-        speed = 0.01f;
+        baseSpeed = 0.01f;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-    }
+    public virtual void Update()
+    {}
     public GameObject deathExplosion;
     public AudioClip deathKnell;
     public void Die()
