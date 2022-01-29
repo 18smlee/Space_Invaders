@@ -442,7 +442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -350, y: 144.70001}
+  m_AnchoredPosition: {x: -250, y: 144.70001}
   m_SizeDelta: {x: 144.55, y: 21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &675271407
@@ -780,7 +780,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -350, y: -152}
+  m_AnchoredPosition: {x: -250, y: -152}
   m_SizeDelta: {x: 144.55, y: 21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1557993354
@@ -1071,7 +1071,7 @@ PrefabInstance:
     - target: {fileID: 745340053353944222, guid: 33e770d6d8ce34b44ad075b3edfe6984,
         type: 3}
       propertyPath: m_Size.x
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 745340053353944222, guid: 33e770d6d8ce34b44ad075b3edfe6984,
         type: 3}
@@ -1182,6 +1182,17 @@ PrefabInstance:
       propertyPath: numRows
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2257203829915969231, guid: 592e2cfaf0e10504b8a45415f5b42451,
+        type: 3}
+      propertyPath: UFOInvader
+      value: 
+      objectReference: {fileID: 4726506846239374909, guid: 8b2be4baea201d940a79e1bdebe55ab5,
+        type: 3}
+    - target: {fileID: 2257203829915969231, guid: 592e2cfaf0e10504b8a45415f5b42451,
+        type: 3}
+      propertyPath: boundingBox
+      value: 
+      objectReference: {fileID: 273180916}
     - target: {fileID: 2257203829915969231, guid: 592e2cfaf0e10504b8a45415f5b42451,
         type: 3}
       propertyPath: invaderSpeed

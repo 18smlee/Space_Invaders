@@ -3,7 +3,14 @@ guid: c1bd27b9b21b2a14692588e333c8f176
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - deathExplosion: {instanceID: 0}
+  - deathKnell: {instanceID: 0}
+  - bullet: {instanceID: 0}
+  - globalScript: {instanceID: 0}
+  - invaderControllerScript: {instanceID: 0}
+  - boundingBox: {fileID: 745340053353944223, guid: 33e770d6d8ce34b44ad075b3edfe6984,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
