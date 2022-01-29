@@ -6,6 +6,7 @@ public class Global : MonoBehaviour
 {
     public int score;
     public int numLives;
+
     // Use this for initialization
     void Start()
     {

@@ -9,6 +9,9 @@ public class InvaderController : MonoBehaviour
     public GameObject boundingBox;
     public GameObject SpawnStart;
     public GameObject SpawnEnd;
+
+    Vector3 spawnStart;
+    Vector3 spawnEnd;
     public int numRows;
     public int numCols;
     float rowSpace;
@@ -18,6 +21,7 @@ public class InvaderController : MonoBehaviour
     public GameObject highInvader;
     public GameObject midInvader;
     public GameObject lowInvader;
+    public GameObject UFOInvader;
 
     public List<List<GameObject>> invaderRows;
     public float invaderSpeed;
@@ -34,16 +38,14 @@ public class InvaderController : MonoBehaviour
         shootInterval = 3.0f;
         numRows = 5;
         numCols = 11;
+        spawnStart = SpawnStart.transform.position;
+        spawnEnd = SpawnEnd.transform.position;
         globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
 
         // initialize array of rows, with each row containing an invader
         invaderRows = new List<List<GameObject>>();
 
         invaderSpeed = 0.005f;
-
-        Vector3 spawnStart = SpawnStart.transform.position;
-        Vector3 spawnEnd = SpawnEnd.transform.position;
-
         rowSpace = Math.Abs(spawnEnd.z - spawnStart.z) / numRows;
         colSpace = Math.Abs(spawnEnd.x - spawnStart.x) / numCols;
 
@@ -60,6 +62,7 @@ public class InvaderController : MonoBehaviour
                     var myNewHighInvader = Instantiate( highInvader, 
                                                         new Vector3(xPos, spawnStart.y, zPos),
                                                         Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                    myNewHighInvader.GetComponent<HighInvader>().setRow(row);
                     myNewHighInvader.transform.parent = gameObject.transform;
                     invadersInRow.Add(myNewHighInvader);
                 }
@@ -92,9 +95,10 @@ public class InvaderController : MonoBehaviour
         
         // Moves the block of invaders
         Vector3 invaderControllerPos = gameObject.transform.position;
-        // Had to hardcode positions because bounding box not working here
-        // BoxCollider boxCollider = boundingBox.GetComponent<BoxCollider>();
-        if (invaderControllerPos.x  > 10.0f || invaderControllerPos.x < -10.0f) {
+        Bounds boxBounds = boundingBox.GetComponent<BoxCollider>().bounds;
+        float spawnHalfWidth = Math.Abs(spawnEnd.x - spawnStart.x) / 2.0f;
+        
+        if (invaderControllerPos.x + spawnHalfWidth > boxBounds.max.x || invaderControllerPos.x - spawnHalfWidth < boxBounds.min.x) {
             invaderSpeed = -invaderSpeed;
             gameObject.transform.position = new Vector3(invaderControllerPos.x, invaderControllerPos.y, invaderControllerPos.z - 0.5f * colSpace);
         }
@@ -109,6 +113,7 @@ public class InvaderController : MonoBehaviour
             }
         }
 
+        // Invaders in the bottom row shoot at a specified interval
         timer += Time.deltaTime;
         var rand = new System.Random();
         if (timer > shootInterval) {
@@ -117,6 +122,19 @@ public class InvaderController : MonoBehaviour
             // Randomly choose one invader from the last row to shoot
             int randomInvader = rand.Next(invaderRows[lastRow].Count);
             invaderRows[lastRow][randomInvader].GetComponent<Invader>().Shoot();
+        }
+
+        // Every frame, there is a small probability that the UFO will appear
+        float ufoSpeed = UFOInvader.GetComponent<UFOInvader>().speed;
+        float ufoProb = UFOInvader.GetComponent<UFOInvader>().prob;
+        if (rand.NextDouble() < ufoProb) {
+            GameObject newUFO = Instantiate( UFOInvader,
+                                             new Vector3(boxBounds.min.x, boxBounds.min.y, boxBounds.max.z + rowSpace),
+                                             Quaternion.AngleAxis(180, new Vector3(0, 1, 0)));
+            
+            // UFOInvader newUFOScript = newUFO.GetComponent<UFOInvader>();
+            // if (newUFOScript)
+                         
         }
 
         // Player wins if all invaders are eliminated

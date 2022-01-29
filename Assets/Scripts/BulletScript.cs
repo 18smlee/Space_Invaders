@@ -6,8 +6,7 @@ public class BulletScript : MonoBehaviour
     public Quaternion heading;
     public GameObject cam;
     Global globalScript;
-
-    public bool hitsShip;
+    
 
     void OnTriggerEnter(Collider collider) 
     {
@@ -16,8 +15,6 @@ public class BulletScript : MonoBehaviour
             Destroy(gameObject);
             Ship ship = collider.gameObject.GetComponent<Ship>();
             ship.getsHit();
-            hitsShip = true;
-            Debug.Log(hitsShip + "-----------------------------------------------------------------");
             globalScript.loseLife();
         }
         else if (collider.CompareTag("Invader"))
@@ -40,11 +37,9 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-
     // Use this for initialization
     void Start()
     {
-        hitsShip = false;
         globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
         // travel straight in the z-axis
         thrust.z = 400.0f;

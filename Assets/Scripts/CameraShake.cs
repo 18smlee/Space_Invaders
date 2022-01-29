@@ -11,14 +11,12 @@ public class CameraShake : MonoBehaviour
 
         while (elapsed < duration)
         {
-            Debug.Log("I am shaking");
             float x = Random.Range(-1f, 1f) * magnitude;
             float z = Random.Range(-1f, 1f) * magnitude;
 
             transform.localPosition = new Vector3(x, originalPos.y, z);
 
             elapsed += Time.deltaTime;
-            Debug.Log("elapsed " + elapsed);
             yield return null;
         }
 

@@ -27,14 +27,16 @@ public class Invader : MonoBehaviour
     {}
 
     public void Die()
-    { 
+    {
         AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
         Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
         globalScript.score += pointValue;
-
+        Debug.Log(invaderControllerScript.invaderRows.Count());
+        
         // If there's only 1 invader left, remove row from list
         if (invaderControllerScript.invaderRows[row].Count() == 1) {
            invaderControllerScript.invaderRows.RemoveAt(row);
+           Debug.Log(invaderControllerScript.invaderRows.Count());
         }
 
         Destroy(gameObject);
