@@ -2,45 +2,62 @@ using UnityEngine;
 using System.Collections;
 public class BulletScript : MonoBehaviour
 {
+    public bool isActive;
+    public bool hasHitInvader;
     public Vector3 thrust;
     public Quaternion heading;
     public GameObject cam;
     Global globalScript;
     
 
-    void OnTriggerEnter(Collider collider) 
+    void OnCollisionEnter(Collision collision) 
     {
-        Debug.Log("colliding with " + collider.tag);
-        if (collider.CompareTag("Ship"))
-        {
-            Destroy(gameObject);
-            Ship ship = collider.gameObject.GetComponent<Ship>();
-            ship.getsHit();
-            globalScript.loseLife();
-        }
-        else if (collider.CompareTag("Invader"))
-        {
-            Invader invader = collider.gameObject.GetComponent<Invader>();
-            invader.Die();
-            Destroy(gameObject);
-        }
-        else if (collider.CompareTag("BarricadeCube"))
-        {
-            BarricadeCube cube = collider.gameObject.GetComponent<BarricadeCube>();
-            cube.Die();
-            Destroy(gameObject);
-        }
-        else
-        {
-            // if we collided with something else, print to console
-            // what the other thing was
-            // Debug.Log("Collided with " + collider.tag);
+        Collider collider = collision.collider;
+        if (isActive) {
+            Debug.Log("i am active and hitting something");
+            if (collider.CompareTag("Ship"))
+            {
+                Die();
+                Ship ship = collider.gameObject.GetComponent<Ship>();
+                ship.getsHit();
+                globalScript.loseLife();
+            }
+            else if (collider.CompareTag("Invader"))
+            {
+                Die();
+                Invader invader = collider.gameObject.GetComponent<Invader>();
+                invader.Die();
+                gameObject.GetComponent<Rigidbody>().useGravity = true;
+                Destroy(gameObject);
+            }
+            else if (collider.CompareTag("BarricadeCube"))
+            {
+                Die();
+                BarricadeCube cube = collider.gameObject.GetComponent<BarricadeCube>();
+                cube.Die();
+               
+                // Destroy(gameObject);
+            }
+            else if (collider.CompareTag("Floor")) {
+                Die();
+            }
+            else if (collider.CompareTag("Ceiling")) {
+                Die();
+            }
+            else
+            {
+                // if we collided with something else, print to console
+                // what the other thing was
+                Debug.Log("Collided with " + collider.tag);
+            }
         }
     }
 
     // Use this for initialization
     void Start()
     {
+        isActive = true;
+        hasHitInvader = false;
         globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
         // travel straight in the z-axis
         thrust.z = 400.0f;
@@ -55,4 +72,10 @@ public class BulletScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {}
+
+    void Die() {
+        Debug.Log("bullet has died");
+        isActive = false;
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
+    }
 }

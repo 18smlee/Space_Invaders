@@ -101,7 +101,7 @@ public class InvaderController : MonoBehaviour
     {
         // Moves the block of invaders
         Vector3 invaderControllerPos = gameObject.transform.position;
-        Bounds boxBounds = boundingBox.GetComponent<BoxCollider>().bounds;
+        UnityEngine.Bounds boxBounds = boundingBox.GetComponent<BoxCollider>().bounds;
         float spawnHalfWidth = Math.Abs(spawnEnd.x - spawnStart.x) / 2.0f;
 
         if (invaderControllerPos.x + spawnHalfWidth > boxBounds.max.x || invaderControllerPos.x - spawnHalfWidth < boxBounds.min.x) {

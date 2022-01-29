@@ -42,6 +42,7 @@ public class Invader : MonoBehaviour
 
         isAlive = false;
         gameObject.GetComponent<Rigidbody>().useGravity = true;
+        transform.parent = null;
         // Destroy(gameObject);
     }
 

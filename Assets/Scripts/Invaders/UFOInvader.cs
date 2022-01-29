@@ -19,7 +19,7 @@ public class UFOInvader : Invader
     // Update is called once per frame
     public override void Update()
     {
-        Bounds boxBounds = boundingBox.GetComponent<BoxCollider>().bounds;
+        UnityEngine.Bounds boxBounds = boundingBox.GetComponent<BoxCollider>().bounds;
         if (transform.position.x <= boxBounds.max.x && transform.position.x >= boxBounds.min.x) {
             gameObject.transform.Translate(speed, 0, 0);
         } else {

@@ -11,6 +11,8 @@ TagManager:
   - Ship
   - Barricade
   - BarricadeCube
+  - Floor
+  - Ceiling
   layers:
   - Default
   - TransparentFX

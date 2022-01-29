@@ -12,7 +12,7 @@ public class BarricadeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Bounds boxBounds = boundingBox.GetComponent<BoxCollider>().bounds;
+        UnityEngine.Bounds boxBounds = boundingBox.GetComponent<BoxCollider>().bounds;
 
         numBarricades = 2;
         barricadeSpace = Mathf.Abs(boxBounds.max.x - boxBounds.min.x) / numBarricades;

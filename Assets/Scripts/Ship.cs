@@ -6,6 +6,8 @@ public class Ship : MonoBehaviour
 {
     public float thrustSpeed;
     public float rotation;
+    public float shootInterval;
+    public float timer;
     public GameObject bullet;
     public GameObject boundingBox;
     public GameObject deathExplosion;
@@ -14,6 +16,10 @@ public class Ship : MonoBehaviour
     void Start()
     {
         thrustSpeed = 0.03f;
+        shootInterval = 0.5f;
+        timer = 0.0f;
+        boundingBox = GameObject.Find("BoundingBox");
+        Debug.Log(boundingBox);
     }
     
     void Update()
@@ -37,13 +43,17 @@ public class Ship : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown("space"))
+        timer += Time.deltaTime;
+        if (Input.GetKey("space"))
         {
-            Vector3 spawnPos = gameObject.transform.position + new Vector3(0, 0, 1.1f);
-            GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
-            BulletScript b = obj.GetComponent<BulletScript>();
-            Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
-            b.heading = rot;
+            if (timer > shootInterval) {
+                timer = 0;
+                Vector3 spawnPos = gameObject.transform.position + new Vector3(0, 0, 1.1f);
+                GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
+                BulletScript b = obj.GetComponent<BulletScript>();
+                Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
+                b.heading = rot;
+            }
         }
     }
 

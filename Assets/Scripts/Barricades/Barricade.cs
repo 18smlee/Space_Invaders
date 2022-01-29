@@ -9,7 +9,7 @@ public class Barricade : MonoBehaviour
     void Start()
     {
         // Bounds meshBounds = gameObject.GetComponent<MeshCollider>().bounds;
-        Bounds boxBounds = gameObject.GetComponent<BoxCollider>().bounds;
+        UnityEngine.Bounds boxBounds = gameObject.GetComponent<BoxCollider>().bounds;
 
         for (float x = boxBounds.min.x; x < boxBounds.max.x; x += barricadeCube.transform.localScale.x) {
             for (float z = boxBounds.min.z; z < boxBounds.max.z; z += barricadeCube.transform.localScale.z) {
