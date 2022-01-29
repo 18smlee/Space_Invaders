@@ -18,8 +18,7 @@ public class TitleScript : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.BeginArea(new Rect(10, Screen.height / 2 + 100,
-        Screen.width - 10, 200));
+        GUILayout.BeginArea(new Rect(10, Screen.height / 2 + 100, Screen.width - 10, 200));
         // Load the main scene
         // The scene needs to be added into build setting to be loaded!
         if (GUILayout.Button("New Game"))

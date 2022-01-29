@@ -10,6 +10,7 @@ public class BulletScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collider) 
     {
+        Debug.Log("colliding with " + collider.tag);
         if (collider.CompareTag("Ship"))
         {
             Destroy(gameObject);

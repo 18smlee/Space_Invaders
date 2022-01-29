@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4726506846239374898}
   - component: {fileID: 4726506846239374899}
   - component: {fileID: 4726506846239374908}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UFOInvader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4726506846239374909}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -112,6 +112,7 @@ MonoBehaviour:
   pointValue: 0
   row: 0
   rotation: 0
+  isAlive: 0
   deathExplosion: {fileID: 0}
   deathKnell: {fileID: 0}
   bullet: {fileID: 0}

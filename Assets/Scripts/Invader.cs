@@ -8,6 +8,7 @@ public class Invader : MonoBehaviour
     public int pointValue;
     public int row;
     public float rotation;
+    public bool isAlive;
     public GameObject deathExplosion;
     public AudioClip deathKnell;
     public GameObject bullet;
@@ -39,14 +40,19 @@ public class Invader : MonoBehaviour
            Debug.Log(invaderControllerScript.invaderRows.Count());
         }
 
-        Destroy(gameObject);
+        isAlive = false;
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
+        // Destroy(gameObject);
     }
 
     // If an invader collides with the ship, player loses
-    public virtual void OnTriggerEnter(Collider collider)
+    public virtual void OnCollision(Collision collision)
     {
-        if (collider.CompareTag("Ship") || collider.CompareTag("BarricadeCube")) {
-            globalScript.lose();
+        Collider collider = collision.collider;
+        if (collider.CompareTag("Ship")) {
+            if (isAlive) {
+                globalScript.lose();
+            }
         }
     }
 

@@ -14,7 +14,7 @@ public class BarricadeController : MonoBehaviour
     {
         Bounds boxBounds = boundingBox.GetComponent<BoxCollider>().bounds;
 
-        numBarricades = 4;
+        numBarricades = 2;
         barricadeSpace = Mathf.Abs(boxBounds.max.x - boxBounds.min.x) / numBarricades;
         
         for (float x = boxBounds.min.x + barricadeSpace / 2.0f; x < boxBounds.max.x; x += barricadeSpace) {

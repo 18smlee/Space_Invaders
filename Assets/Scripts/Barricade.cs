@@ -8,7 +8,7 @@ public class Barricade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Bounds meshBounds = gameObject.GetComponent<MeshCollider>().bounds;
+        // Bounds meshBounds = gameObject.GetComponent<MeshCollider>().bounds;
         Bounds boxBounds = gameObject.GetComponent<BoxCollider>().bounds;
 
         for (float x = boxBounds.min.x; x < boxBounds.max.x; x += barricadeCube.transform.localScale.x) {

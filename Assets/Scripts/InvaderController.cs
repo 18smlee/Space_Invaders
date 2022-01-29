@@ -37,6 +37,7 @@ public class InvaderController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        invaderSpeed = 0.001f;
         shootTimer = 0;
         shootInterval = 3.0f;
         ufoTimer = 0;
@@ -51,7 +52,7 @@ public class InvaderController : MonoBehaviour
         // initialize array of rows, with each row containing an invader
         invaderRows = new List<List<GameObject>>();
 
-        invaderSpeed = 0.005f;
+        
         rowSpace = Math.Abs(spawnEnd.z - spawnStart.z) / numRows;
         colSpace = Math.Abs(spawnEnd.x - spawnStart.x) / numCols;
 
