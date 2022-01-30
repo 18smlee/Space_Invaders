@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3179384671486829131}
   - component: {fileID: 3179384671486829133}
   - component: {fileID: 3179384671486829132}
-  - component: {fileID: 3179384671486829134}
   m_Layer: 5
   m_Name: Heart
   m_TagString: Untagged
@@ -28,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 3179384671486829130}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.30000004, y: 0.30000004, z: 0.30000004}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -76,15 +75,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3179384671486829134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3179384671486829130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 230906949093f984bb879a950b409dc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

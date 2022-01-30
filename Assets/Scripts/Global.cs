@@ -7,6 +7,8 @@ public class Global : MonoBehaviour
     public int score;
     public int hiScore;
     public int numLives;
+    public GameObject canvas;
+    public GameObject heart;
 
     // Use this for initialization
     void Start()
@@ -14,6 +16,14 @@ public class Global : MonoBehaviour
         numLives = 3;
         hiScore = PlayerPrefs.GetInt("hiScore");
         score = 0;
+
+        float xSpace = 28.0f;
+        for (int i = 0; i < numLives; i++) {
+            var newHeart = Instantiate(heart);
+            newHeart.transform.SetParent(canvas.transform, false);
+            newHeart.GetComponent<RectTransform>().anchoredPosition = new Vector3(-217 + i * xSpace, -146, 0);
+        }
+        
     }
     void Update()
     {

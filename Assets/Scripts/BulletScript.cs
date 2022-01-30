@@ -16,10 +16,10 @@ public class BulletScript : MonoBehaviour
         if (isActive) {
             if (collider.CompareTag("Ship"))
             {
-                Die();
                 Ship ship = collider.gameObject.GetComponent<Ship>();
                 ship.getsHit();
                 globalScript.loseLife();
+                Destroy(gameObject);
             }
             else if (collider.CompareTag("Invader"))
             {
