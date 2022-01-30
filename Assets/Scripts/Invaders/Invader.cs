@@ -11,7 +11,7 @@ public class Invader : MonoBehaviour
     public bool isAlive;
     public GameObject deathExplosion;
     public AudioClip deathKnell;
-    public GameObject bullet;
+    // public GameObject bullet;
 
     public Global globalScript;
     public InvaderController invaderControllerScript;
@@ -61,7 +61,7 @@ public class Invader : MonoBehaviour
         }
     }
 
-    public void Shoot()
+    public void Shoot(GameObject bullet)
     {
         Vector3 spawnPos = gameObject.transform.position + new Vector3(0, 0, -1f);
         GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;

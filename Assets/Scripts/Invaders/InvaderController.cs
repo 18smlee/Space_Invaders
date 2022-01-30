@@ -22,6 +22,7 @@ public class InvaderController : MonoBehaviour
     public GameObject midInvader;
     public GameObject lowInvader;
     public GameObject UFOInvader;
+    public GameObject invaderBullet;
 
     public List<List<GameObject>> invaderRows;
     public float invaderSpeed;
@@ -38,12 +39,12 @@ public class InvaderController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        invaderSpeed = 0.01f;
+        invaderSpeed = 0.005f;
         shootTimer = 0;
         shootInterval = 3.0f;
         ufoTimer = 0;
         ufoInterval = 5.0f;
-        ufoSpeed = 0.4f;
+        ufoSpeed = 0.04f;
         isGoingRight = true;
         numRows = 5;
         numCols = 11;
@@ -130,7 +131,7 @@ public class InvaderController : MonoBehaviour
             int lastRow = invaderRows.Count() - 1;
             // Randomly choose one invader from the last row to shoot
             int randomInvader = rand.Next(invaderRows[lastRow].Count);
-            invaderRows[lastRow][randomInvader].GetComponent<Invader>().Shoot();
+            invaderRows[lastRow][randomInvader].GetComponent<Invader>().Shoot(invaderBullet);
         }
 
         // Every frame, there is a small probability that the UFO will appear

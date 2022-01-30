@@ -16,7 +16,7 @@ public class Ship : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        thrustSpeed = 0.3f;
+        thrustSpeed = 0.05f;
         shootInterval = 0.5f;
         timer = 0.0f;
         boundingBox = GameObject.Find("BoundingBox");
