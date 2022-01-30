@@ -13,7 +13,7 @@ public class UFOInvader : Invader
         base.Start();
         boundingBox = GameObject.Find("BoundingBox");
         pointValue = 50;
-        prob = 0.5;
+        prob = 1.0;
     }
 
     // Update is called once per frame

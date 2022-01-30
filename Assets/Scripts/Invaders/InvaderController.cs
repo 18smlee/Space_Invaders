@@ -41,7 +41,7 @@ public class InvaderController : MonoBehaviour
         shootTimer = 0;
         shootInterval = 3.0f;
         ufoTimer = 0;
-        ufoInterval = 3.0f;
+        ufoInterval = 1.0f;
         isGoingRight = true;
         numRows = 5;
         numCols = 11;
@@ -142,14 +142,14 @@ public class InvaderController : MonoBehaviour
                 if (isGoingRight) {
                     GameObject newUFO = Instantiate( UFOInvader,
                                                 new Vector3(boxBounds.min.x, boxBounds.min.y, boxBounds.max.z + rowSpace),
-                                                Quaternion.AngleAxis(0, new Vector3(0, 1, 0)));
+                                                Quaternion.AngleAxis(0, new Vector3(1, 0, 0)));
                     newUFO.GetComponent<UFOInvader>().setSpeed(0.04f);
                     isGoingRight = false;
                 } else {
                     GameObject newUFO = Instantiate( UFOInvader,
                                                 new Vector3(boxBounds.max.x, boxBounds.min.y, boxBounds.max.z + rowSpace),
-                                                Quaternion.AngleAxis(0, new Vector3(0, 1, 0)));
-                    newUFO.GetComponent<UFOInvader>().setSpeed(-0.04f);
+                                                Quaternion.AngleAxis(180, new Vector3(0, 0, 1)));
+                    newUFO.GetComponent<UFOInvader>().setSpeed(0.04f);
                     isGoingRight = true;
                 }
                 

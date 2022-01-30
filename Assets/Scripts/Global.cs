@@ -9,6 +9,7 @@ public class Global : MonoBehaviour
     public int numLives;
     public GameObject canvas;
     public GameObject heart;
+    List<GameObject> heartList;
 
     // Use this for initialization
     void Start()
@@ -16,14 +17,14 @@ public class Global : MonoBehaviour
         numLives = 3;
         hiScore = PlayerPrefs.GetInt("hiScore");
         score = 0;
+        heartList = new List<GameObject>();
 
         float xSpace = 28.0f;
         for (int i = 0; i < numLives; i++) {
-            var newHeart = Instantiate(heart);
-            newHeart.transform.SetParent(canvas.transform, false);
+            var newHeart = Instantiate(heart, canvas.transform);
             newHeart.GetComponent<RectTransform>().anchoredPosition = new Vector3(-217 + i * xSpace, -146, 0);
+            heartList.Add(newHeart);
         }
-        
     }
     void Update()
     {
@@ -55,6 +56,10 @@ public class Global : MonoBehaviour
         // camera shake
         CameraShake camShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         StartCoroutine(camShake.Shake(0.15f, 0.4f));
+        Debug.Log(heartList.Count);
+        Destroy(heartList[heartList.Count - 1]);
+        // heartList.RemoveAt(heartList.Count - 1);
+        Debug.Log(heartList[2]);
     }
 
     public void updateHiScore() {
