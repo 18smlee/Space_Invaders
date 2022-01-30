@@ -17,6 +17,7 @@ public class HiScoreUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hiScoreText.text = globalObj.hiScore.ToString();
+        string text = "High Score\n" + globalObj.hiScore;
+        hiScoreText.text = text;
     }
 }

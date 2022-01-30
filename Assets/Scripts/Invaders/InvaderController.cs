@@ -68,7 +68,7 @@ public class InvaderController : MonoBehaviour
                 if (row == 0) {
                     var myNewHighInvader = Instantiate( highInvader, 
                                                         new Vector3(xPos, spawnStart.y, zPos),
-                                                        Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                                                        Quaternion.AngleAxis(90, new Vector3(1, 0, 0)) * Quaternion.AngleAxis(180, new Vector3(0, 1, 0)));
                     myNewHighInvader.GetComponent<HighInvader>().setRow(row);
                     myNewHighInvader.transform.parent = gameObject.transform;
                     invadersInRow.Add(myNewHighInvader);
@@ -77,7 +77,7 @@ public class InvaderController : MonoBehaviour
                 if (row == 1 || row == 2) {
                     var myNewMidInvader =  Instantiate(midInvader, 
                                                         new Vector3(xPos, spawnStart.y, zPos),
-                                                        Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                                                        Quaternion.AngleAxis(90, new Vector3(1, 0, 0)) * Quaternion.AngleAxis(180, new Vector3(0, 1, 0)));
                     myNewMidInvader.transform.parent = gameObject.transform;
                     myNewMidInvader.GetComponent<MidInvader>().setRow(row);
                     invadersInRow.Add(myNewMidInvader);
@@ -86,7 +86,7 @@ public class InvaderController : MonoBehaviour
                 if (row == 3 || row == 4) {
                     var myNewLowInvader = Instantiate( lowInvader,
                                                         new Vector3(xPos, spawnStart.y, zPos),
-                                                        Quaternion.AngleAxis(180, new Vector3(0, 1, 0)) );
+                                                        Quaternion.AngleAxis(90, new Vector3(1, 0, 0)) * Quaternion.AngleAxis(180, new Vector3(0, 1, 0)));
                     myNewLowInvader.transform.parent = gameObject.transform;
                     myNewLowInvader.GetComponent<LowInvader>().setRow(row);
                     invadersInRow.Add(myNewLowInvader);
@@ -138,7 +138,6 @@ public class InvaderController : MonoBehaviour
         if (ufoTimer > ufoInterval) {
             ufoTimer = 0;
             double random = rand.NextDouble();
-            Debug.Log(random);
             if (random <= ufoProb) {
                 if (isGoingRight) {
                     GameObject newUFO = Instantiate( UFOInvader,

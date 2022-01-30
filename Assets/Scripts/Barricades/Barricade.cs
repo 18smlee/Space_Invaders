@@ -17,7 +17,7 @@ public class Barricade : MonoBehaviour
                 // if (meshBounds.Contains(currPos)) {
                     Instantiate( barricadeCube,
                                  new Vector3(x, gameObject.transform.position.y, z),
-                                 Quaternion.AngleAxis(180, new Vector3(0, 1, 0)));
+                                 Quaternion.AngleAxis(-90, new Vector3(1, 0, 0)));
                 // }
             }
         }

@@ -13,7 +13,6 @@ public class Global : MonoBehaviour
     {
         numLives = 3;
         hiScore = PlayerPrefs.GetInt("hiScore");
-        Debug.Log("hiscore is set to " + hiScore);
         score = 0;
     }
     void Update()
@@ -50,7 +49,6 @@ public class Global : MonoBehaviour
 
     public void updateHiScore() {
         hiScore = score;
-        Debug.Log("hi score is now " + hiScore);
         PlayerPrefs.SetInt("hiScore", hiScore);
         PlayerPrefs.Save();
     }

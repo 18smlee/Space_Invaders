@@ -14,7 +14,6 @@ public class BulletScript : MonoBehaviour
     {
         Collider collider = collision.collider;
         if (isActive) {
-            Debug.Log("i am active and hitting something");
             if (collider.CompareTag("Ship"))
             {
                 Die();
@@ -32,11 +31,9 @@ public class BulletScript : MonoBehaviour
             }
             else if (collider.CompareTag("BarricadeCube"))
             {
-                Die();
                 BarricadeCube cube = collider.gameObject.GetComponent<BarricadeCube>();
                 cube.Die();
-               
-                // Destroy(gameObject);
+                Destroy(gameObject);
             }
             else if (collider.CompareTag("Floor")) {
                 Die();
@@ -74,7 +71,6 @@ public class BulletScript : MonoBehaviour
     {}
 
     void Die() {
-        Debug.Log("bullet has died");
         isActive = false;
         gameObject.GetComponent<Rigidbody>().useGravity = true;
     }

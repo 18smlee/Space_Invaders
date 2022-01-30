@@ -19,6 +19,7 @@ public class Invader : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
+        isAlive = true;
         globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
         invaderControllerScript = GameObject.Find("InvaderController").GetComponent<InvaderController>();
     }
@@ -32,7 +33,6 @@ public class Invader : MonoBehaviour
         AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
         Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
         globalScript.score += pointValue;
-        Debug.Log(invaderControllerScript.invaderRows.Count());
         
         // If there's only 1 invader left, remove row from list
         if (invaderControllerScript.invaderRows[row].Count() == 1) {
@@ -40,20 +40,24 @@ public class Invader : MonoBehaviour
            Debug.Log(invaderControllerScript.invaderRows.Count());
         }
 
-        isAlive = false;
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
         gameObject.GetComponent<Rigidbody>().useGravity = true;
+        isAlive = false;
         transform.parent = null;
-        // Destroy(gameObject);
     }
 
     // If an invader collides with the ship, player loses
-    public virtual void OnCollision(Collision collision)
+    public virtual void OnCollisionEnter(Collision collision)
     {
         Collider collider = collision.collider;
-        if (collider.CompareTag("Ship")) {
+        if (collider.CompareTag("Ship") || collider.CompareTag("BarricadeCube")) {
             if (isAlive) {
                 globalScript.lose();
             }
+        }
+        if (collider.CompareTag("Invader")) {
+            Debug.Log("Invader hitting another invader");
+            Invader other = collider.gameObject.GetComponent<Invader>();
         }
     }
 
