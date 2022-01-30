@@ -116,7 +116,7 @@ MonoBehaviour:
   isAlive: 0
   deathExplosion: {fileID: 3460713223719996648, guid: 94ba570385b44b64db5fe594b29ded84,
     type: 3}
-  deathKnell: {fileID: 8300000, guid: 571cdb3e4a970b8489445ff17d5f7a0c, type: 3}
+  deathKnell: {fileID: 8300000, guid: d3dd317a0d3297b49a6e600990bbefc9, type: 3}
   bullet: {fileID: 7827519291156076616, guid: 6b70593691d60c94e9665b7bd8868d26, type: 3}
   globalScript: {fileID: 0}
   invaderControllerScript: {fileID: 0}

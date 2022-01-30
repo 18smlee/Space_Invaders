@@ -33,17 +33,18 @@ public class Invader : MonoBehaviour
         AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
         Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
         globalScript.score += pointValue;
-        
-        // If there's only 1 invader left, remove row from list
-        if (invaderControllerScript.invaderRows[row].Count() == 1) {
-           invaderControllerScript.invaderRows.RemoveAt(row);
-           Debug.Log(invaderControllerScript.invaderRows.Count());
-        }
 
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         isAlive = false;
         transform.parent = null;
+
+        invaderControllerScript.invaderRows[row].Remove(gameObject);
+        // If there's only 1 invader left, remove row from list
+        if (invaderControllerScript.invaderRows[row].Count() == 0) {
+           invaderControllerScript.invaderRows.RemoveAt(row);
+           Debug.Log("row eliminated there are this many left " + invaderControllerScript.invaderRows.Count());
+        }
     }
 
     // If an invader collides with the ship, player loses

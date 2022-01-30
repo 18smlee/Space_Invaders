@@ -111,4 +111,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathExplosion: {fileID: 3460713223719996648, guid: 94ba570385b44b64db5fe594b29ded84,
     type: 3}
-  deathKnell: {fileID: 8300000, guid: 571cdb3e4a970b8489445ff17d5f7a0c, type: 3}
+  deathKnell: {fileID: 8300000, guid: d7970481b9a0b5e4e83a9a59e12b7455, type: 3}

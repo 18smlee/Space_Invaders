@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e78840e7421cb8b43aae7eaed81bea1e, type: 2}
+  - {fileID: 2100000, guid: e54fcbfdd168ad149827a28840514e50, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,6 +123,7 @@ MonoBehaviour:
     type: 3}
   prob: 0.2
   speed: 0
+  ufoFX: {fileID: 8300000, guid: f3742fe57c1fa4c49b414025d82bd404, type: 3}
 --- !u!54 &8083123180453329788
 Rigidbody:
   m_ObjectHideFlags: 0

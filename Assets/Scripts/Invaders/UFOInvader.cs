@@ -7,13 +7,15 @@ public class UFOInvader : Invader
     public GameObject boundingBox;
     public double prob;
     public float speed;
+    public AudioClip ufoFX;
     // Start is called before the first frame update
     public override void Start()
     {
+        AudioSource.PlayClipAtPoint(ufoFX, gameObject.transform.position);
         base.Start();
         boundingBox = GameObject.Find("BoundingBox");
         pointValue = 50;
-        prob = 1.0;
+        prob = 0.5;
     }
 
     // Update is called once per frame

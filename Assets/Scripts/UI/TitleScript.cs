@@ -16,24 +16,35 @@ public class TitleScript : MonoBehaviour
     {
     }
 
-    void OnGUI()
+    public void goToGamePlay() 
     {
-        GUILayout.BeginArea(new Rect(10, Screen.height / 2 + 100, Screen.width - 10, 200));
-        // Load the main scene
-        // The scene needs to be added into build setting to be loaded!
-        if (GUILayout.Button("New Game"))
-        {
-            SceneManager.LoadScene("GameplayScene");
-        }
-        if (GUILayout.Button("High score"))
-        {
-            Debug.Log("You should implement a high score screen.");
-        }
-        if (GUILayout.Button("Exit"))
-        {
-            Application.Quit();
-            Debug.Log("Application.Quit() only works in build,not in editor");
-        }
-        GUILayout.EndArea();
+        Debug.Log("HUHI");
+        SceneManager.LoadScene("GameplayScene");
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    // void OnGUI()
+    // {
+    //     GUILayout.BeginArea(new Rect(10, Screen.height / 2 + 100, Screen.width - 10, 200));
+    //     // Load the main scene
+    //     // The scene needs to be added into build setting to be loaded!
+    //     if (GUILayout.Button("New Game"))
+    //     {
+    //         SceneManager.LoadScene("GameplayScene");
+    //     }
+    //     if (GUILayout.Button("High score"))
+    //     {
+    //         Debug.Log("You should implement a high score screen.");
+    //     }
+    //     if (GUILayout.Button("Exit"))
+    //     {
+    //         Application.Quit();
+    //         Debug.Log("Application.Quit() only works in build,not in editor");
+    //     }
+    //     GUILayout.EndArea();
+    // }
 }

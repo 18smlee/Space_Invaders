@@ -41,7 +41,7 @@ public class InvaderController : MonoBehaviour
         shootTimer = 0;
         shootInterval = 3.0f;
         ufoTimer = 0;
-        ufoInterval = 1.0f;
+        ufoInterval = 5.0f;
         isGoingRight = true;
         numRows = 5;
         numCols = 11;
@@ -143,19 +143,19 @@ public class InvaderController : MonoBehaviour
                     GameObject newUFO = Instantiate( UFOInvader,
                                                 new Vector3(boxBounds.min.x, boxBounds.min.y, boxBounds.max.z + rowSpace),
                                                 Quaternion.AngleAxis(0, new Vector3(1, 0, 0)));
-                    newUFO.GetComponent<UFOInvader>().setSpeed(0.04f);
+                    newUFO.GetComponent<UFOInvader>().setSpeed(0.025f);
                     isGoingRight = false;
                 } else {
                     GameObject newUFO = Instantiate( UFOInvader,
                                                 new Vector3(boxBounds.max.x, boxBounds.min.y, boxBounds.max.z + rowSpace),
                                                 Quaternion.AngleAxis(180, new Vector3(0, 0, 1)));
-                    newUFO.GetComponent<UFOInvader>().setSpeed(0.04f);
+                    newUFO.GetComponent<UFOInvader>().setSpeed(0.025f);
                     isGoingRight = true;
                 }
                 
             }
         }
-
+        Debug.Log(invaderRows.Count());
         // Player wins if all invaders are eliminated
         if (invaderRows.Count() == 0) {
             globalScript.win();

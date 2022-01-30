@@ -57,7 +57,7 @@ public class BulletScript : MonoBehaviour
         hasHitInvader = false;
         globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
         // travel straight in the z-axis
-        thrust.z = 400.0f;
+        thrust.z = 1500.0f;
         // do not passively decelerate
         GetComponent<Rigidbody>().drag = 0;
         // set the direction it will travel in
