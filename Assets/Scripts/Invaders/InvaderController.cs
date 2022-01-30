@@ -29,6 +29,7 @@ public class InvaderController : MonoBehaviour
     public float ufoTimer;
     public float shootInterval;
     public float ufoInterval;
+    public float ufoSpeed;
     public bool isGoingRight;
     
     // Win lose state
@@ -37,11 +38,12 @@ public class InvaderController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        invaderSpeed = 0.001f;
+        invaderSpeed = 0.01f;
         shootTimer = 0;
         shootInterval = 3.0f;
         ufoTimer = 0;
         ufoInterval = 5.0f;
+        ufoSpeed = 0.4f;
         isGoingRight = true;
         numRows = 5;
         numCols = 11;
@@ -103,6 +105,7 @@ public class InvaderController : MonoBehaviour
         Vector3 invaderControllerPos = gameObject.transform.position;
         UnityEngine.Bounds boxBounds = boundingBox.GetComponent<BoxCollider>().bounds;
         float spawnHalfWidth = Math.Abs(spawnEnd.x - spawnStart.x) / 2.0f;
+        Debug.Log(invaderSpeed);
 
         if (invaderControllerPos.x + spawnHalfWidth > boxBounds.max.x || invaderControllerPos.x - spawnHalfWidth < boxBounds.min.x) {
             invaderSpeed = -invaderSpeed;
@@ -131,7 +134,6 @@ public class InvaderController : MonoBehaviour
         }
 
         // Every frame, there is a small probability that the UFO will appear
-        float ufoSpeed = UFOInvader.GetComponent<UFOInvader>().speed;
         double ufoProb = UFOInvader.GetComponent<UFOInvader>().prob;
 
         ufoTimer += Time.deltaTime;
@@ -143,19 +145,18 @@ public class InvaderController : MonoBehaviour
                     GameObject newUFO = Instantiate( UFOInvader,
                                                 new Vector3(boxBounds.min.x, boxBounds.min.y, boxBounds.max.z + rowSpace),
                                                 Quaternion.AngleAxis(0, new Vector3(1, 0, 0)));
-                    newUFO.GetComponent<UFOInvader>().setSpeed(0.025f);
+                    newUFO.GetComponent<UFOInvader>().setSpeed(ufoSpeed);
                     isGoingRight = false;
                 } else {
                     GameObject newUFO = Instantiate( UFOInvader,
                                                 new Vector3(boxBounds.max.x, boxBounds.min.y, boxBounds.max.z + rowSpace),
                                                 Quaternion.AngleAxis(180, new Vector3(0, 0, 1)));
-                    newUFO.GetComponent<UFOInvader>().setSpeed(0.025f);
+                    newUFO.GetComponent<UFOInvader>().setSpeed(ufoSpeed);
                     isGoingRight = true;
                 }
                 
             }
         }
-        Debug.Log(invaderRows.Count());
         // Player wins if all invaders are eliminated
         if (invaderRows.Count() == 0) {
             globalScript.win();

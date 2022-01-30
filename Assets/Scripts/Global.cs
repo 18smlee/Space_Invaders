@@ -19,10 +19,10 @@ public class Global : MonoBehaviour
         score = 0;
         heartList = new List<GameObject>();
 
-        float xSpace = 28.0f;
+        float xSpace = 18.0f;
         for (int i = 0; i < numLives; i++) {
             var newHeart = Instantiate(heart, canvas.transform);
-            newHeart.GetComponent<RectTransform>().anchoredPosition = new Vector3(-217 + i * xSpace, -146, 0);
+            newHeart.GetComponent<RectTransform>().anchoredPosition = new Vector3(-225 + i * xSpace, -146, 0);
             heartList.Add(newHeart);
         }
     }

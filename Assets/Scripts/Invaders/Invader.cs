@@ -30,6 +30,7 @@ public class Invader : MonoBehaviour
 
     public void Die()
     {
+        Debug.Log("Invader dies");
         AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
         Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
         globalScript.score += pointValue;
@@ -43,7 +44,6 @@ public class Invader : MonoBehaviour
         // If there's only 1 invader left, remove row from list
         if (invaderControllerScript.invaderRows[row].Count() == 0) {
            invaderControllerScript.invaderRows.RemoveAt(row);
-           Debug.Log("row eliminated there are this many left " + invaderControllerScript.invaderRows.Count());
         }
     }
 
@@ -57,7 +57,6 @@ public class Invader : MonoBehaviour
             }
         }
         if (collider.CompareTag("Invader")) {
-            Debug.Log("Invader hitting another invader");
             Invader other = collider.gameObject.GetComponent<Invader>();
         }
     }
@@ -66,7 +65,7 @@ public class Invader : MonoBehaviour
     {
         Vector3 spawnPos = gameObject.transform.position + new Vector3(0, 0, -1f);
         GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
-        BulletScript b = obj.GetComponent<BulletScript>();
+        Bullet b = obj.GetComponent<Bullet>();
         Quaternion rot = Quaternion.Euler(new Vector3(0, -180, 0));
         b.heading = rot;
     }

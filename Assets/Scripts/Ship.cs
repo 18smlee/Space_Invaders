@@ -16,11 +16,10 @@ public class Ship : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        thrustSpeed = 0.03f;
+        thrustSpeed = 0.3f;
         shootInterval = 0.5f;
         timer = 0.0f;
         boundingBox = GameObject.Find("BoundingBox");
-        Debug.Log(boundingBox);
     }
     
     void Update()
@@ -52,7 +51,7 @@ public class Ship : MonoBehaviour
                 AudioSource.PlayClipAtPoint(shootFX, gameObject.transform.position);
                 Vector3 spawnPos = gameObject.transform.position + new Vector3(0, 0, 1.1f);
                 GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
-                BulletScript b = obj.GetComponent<BulletScript>();
+                Bullet b = obj.GetComponent<Bullet>();
                 Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
                 b.heading = rot;
             }

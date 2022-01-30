@@ -1,17 +1,25 @@
 using UnityEngine;
 using System.Collections;
-public class BulletScript : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     public bool isActive;
     public bool hasHitInvader;
     public Vector3 thrust;
     public Quaternion heading;
     public GameObject cam;
-    Global globalScript;
+    public Global globalScript;
     
-
-    void OnCollisionEnter(Collision collision) 
+    // void OnTriggerEnter(Collider collider) {
+    //     // Debug.Log("Bullet hits floor trigger");
+    //     if (collider.CompareTag("FloorTrigger"))
+    //     {
+    //         thrust = new Vector3(0.0f, 0.0f, 0.0f);
+    //         Die();
+    //     }
+    // }
+    public virtual void OnCollisionEnter(Collision collision) 
     {
+        Debug.Log(isActive);
         Collider collider = collision.collider;
         if (isActive) {
             if (collider.CompareTag("Ship"))
@@ -23,7 +31,8 @@ public class BulletScript : MonoBehaviour
             }
             else if (collider.CompareTag("Invader"))
             {
-                Die();
+                Debug.Log("Bullet hits an invader");
+                // Die();
                 Invader invader = collider.gameObject.GetComponent<Invader>();
                 invader.Die();
                 gameObject.GetComponent<Rigidbody>().useGravity = true;
@@ -45,13 +54,19 @@ public class BulletScript : MonoBehaviour
             {
                 // if we collided with something else, print to console
                 // what the other thing was
-                Debug.Log("Collided with " + collider.tag);
+                // Debug.Log("Collided with " + collider.tag);
             }
         }
+                    else
+            {
+                // if we collided with something else, print to console
+                // what the other thing was
+                Debug.Log("Collided with " + collider.tag);
+            }
     }
 
     // Use this for initialization
-    void Start()
+    public virtual void Start()
     {
         isActive = true;
         hasHitInvader = false;
@@ -67,10 +82,11 @@ public class BulletScript : MonoBehaviour
         GetComponent<Rigidbody>().AddRelativeForce(thrust);
     }
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {}
 
-    void Die() {
+    public virtual void Die() {
+        Debug.Log("Bullet dies");
         isActive = false;
         gameObject.GetComponent<Rigidbody>().useGravity = true;
     }
