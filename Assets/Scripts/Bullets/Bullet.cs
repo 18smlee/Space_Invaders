@@ -26,8 +26,10 @@ public class Bullet : MonoBehaviour
             else if (collider.CompareTag("Invader"))
             {
                 Invader invader = collider.gameObject.GetComponent<Invader>();
-                invader.Die();
-                gameObject.GetComponent<Rigidbody>().useGravity = true;
+                if (invader.isAlive) {
+                    invader.Die();
+                    gameObject.GetComponent<Rigidbody>().useGravity = true;
+                }
                 Destroy(gameObject);
             }
             else if (collider.CompareTag("BarricadeCube"))

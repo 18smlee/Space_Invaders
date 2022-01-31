@@ -10,6 +10,7 @@ public class Sprinkle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        global = GameObject.Find("GlobalObject").GetComponent<Global>();
         pointValue = 2;
     }
 

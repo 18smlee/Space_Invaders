@@ -176,13 +176,32 @@ public class InvaderController : MonoBehaviour
     void spawnSprinkles() {
         Vector3 invaderControlPos = gameObject.transform.position;
         float spawnHalfWidth = Math.Abs(spawnEnd.x - spawnStart.x) / 2.0f;
+        var rand = new System.Random();
         for (int i = 0; i < 100; i++) {
             Vector3 sprinklePos = new Vector3(  UnityEngine.Random.Range(invaderControlPos.x - spawnHalfWidth, invaderControlPos.x + spawnHalfWidth) * 1.3f,
                                                 invaderControlPos.y,
                                                 UnityEngine.Random.Range(15f - 2f, 15f + 2f));
-            Instantiate( sprinkle,
+            GameObject sprinkleObj = Instantiate( sprinkle,
                     sprinklePos,
-                    Quaternion.AngleAxis(0, new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f))));
+                    Quaternion.AngleAxis(UnityEngine.Random.Range(0f, 360f), new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f))));
+            
+            // sets sprinkle colors
+            var sprinkleRenderer = sprinkleObj.GetComponent<Renderer>();
+            double random = rand.NextDouble();
+            // pink
+            if (random < 0.3) {
+                sprinkleRenderer.material.SetColor("_Color", new Color(1, 0.5f, 0.5f));
+            }
+            // white
+            else if (random < 0.7)
+            {
+                sprinkleRenderer.material.SetColor("_Color", new Color(1, 1, 1));
+            }
+            // green
+            else
+            {
+                sprinkleRenderer.material.SetColor("_Color", new Color(1, 0.9f, 0.3f));
+            }
         }
     }
 
