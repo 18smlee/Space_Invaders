@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
 
     public virtual void OnCollisionEnter(Collision collision) 
     {
+        Debug.Log("Bullet hits something");
         Collider collider = collision.collider;
         if (isActive) 
         {
@@ -24,7 +25,6 @@ public class Bullet : MonoBehaviour
             }
             else if (collider.CompareTag("Invader"))
             {
-                Debug.Log("Bullet hits an invader");
                 Invader invader = collider.gameObject.GetComponent<Invader>();
                 invader.Die();
                 gameObject.GetComponent<Rigidbody>().useGravity = true;

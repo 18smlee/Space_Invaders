@@ -47,7 +47,7 @@ public class InvaderController : MonoBehaviour
         shootTimer = 0;
         shootInterval = 3.0f;
         ufoTimer = 0;
-        ufoInterval = 5.0f;
+        ufoInterval = 1.0f;
         ufoSpeed = 0.04f;
         sprinkleTimer = 0;
         sprinkleInterval = 5.0f;
@@ -121,15 +121,6 @@ public class InvaderController : MonoBehaviour
             gameObject.transform.position = new Vector3(invaderControllerPos.x, invaderControllerPos.y, invaderControllerPos.z - 0.5f * colSpace);
         }
         gameObject.transform.Translate(invaderSpeed, 0, 0);
-
-        // Remove invaders that have been destroyed
-        // for (int i = 0; i < invaderGrid.Count(); i++) {
-        //     for (int j = 0; j < invaderGrid[i].Count(); j++) {
-        //         if (invaderGrid[i][j] == null) {
-        //             invaderGrid[i].Remove(invaderGrid[i][j]);
-        //         }
-        //     }
-        // }
 
         // Invaders in the bottom row shoot at a specified interval
         shootTimer += Time.deltaTime;

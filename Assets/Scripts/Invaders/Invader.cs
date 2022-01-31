@@ -31,7 +31,6 @@ public class Invader : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("Invader dies");
         AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
         Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
         globalScript.score += pointValue;

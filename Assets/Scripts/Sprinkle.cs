@@ -25,6 +25,10 @@ public class Sprinkle : MonoBehaviour
     }
     
     public void OnCollisionEnter(Collision collision) {
-        Debug.Log("sprinkle hit something");
+        Collider collider = collision.collider;
+        if (collider.CompareTag("Ship")) {
+            Debug.Log("ship collected sprinkle");
+            Die();
+        }
     }
 }

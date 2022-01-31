@@ -19,7 +19,7 @@ public class Ship : MonoBehaviour
     void Start()
     {
         thrustSpeed = 0.05f;
-        shootInterval = 0.5f;
+        shootInterval = 0.1f;
         timer = 0.0f;
         boundingBox = GameObject.Find("BoundingBox");
         bulletQueue = new List<string>();

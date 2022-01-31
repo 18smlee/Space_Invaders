@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8083123180453329788}
   m_Layer: 7
   m_Name: UFOInvader
-  m_TagString: Untagged
+  m_TagString: Invader
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,11 +112,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointValue: 0
   row: 0
+  col: 0
   rotation: 0
   isAlive: 0
   deathExplosion: {fileID: 0}
   deathKnell: {fileID: 0}
-  bullet: {fileID: 0}
   globalScript: {fileID: 0}
   invaderControllerScript: {fileID: 0}
   boundingBox: {fileID: 745340053353944223, guid: 33e770d6d8ce34b44ad075b3edfe6984,
