@@ -7,6 +7,7 @@ public class Invader : MonoBehaviour
 {
     public int pointValue;
     public int row;
+    public int col;
     public float rotation;
     public bool isAlive;
     public GameObject deathExplosion;
@@ -40,10 +41,9 @@ public class Invader : MonoBehaviour
         isAlive = false;
         transform.parent = null;
 
-        invaderControllerScript.invaderRows[row].Remove(gameObject);
         // If there's only 1 invader left, remove row from list
-        if (invaderControllerScript.invaderRows[row].Count() == 0) {
-           invaderControllerScript.invaderRows.RemoveAt(row);
+        if (invaderControllerScript.invaderGrid[row].Count() == 0) {
+           invaderControllerScript.invaderGrid.RemoveAt(row);
         }
     }
 
@@ -56,8 +56,10 @@ public class Invader : MonoBehaviour
                 globalScript.lose();
             }
         }
+        // implement rotating later
         if (collider.CompareTag("Invader")) {
             Invader other = collider.gameObject.GetComponent<Invader>();
+
         }
     }
 
@@ -72,5 +74,9 @@ public class Invader : MonoBehaviour
 
     public virtual void setRow(int rowIn) {
         row = rowIn;
+    }
+
+    public virtual void setCol(int colIn) {
+        col = colIn;
     }
 }

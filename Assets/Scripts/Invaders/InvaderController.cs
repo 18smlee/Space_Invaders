@@ -23,11 +23,15 @@ public class InvaderController : MonoBehaviour
     public GameObject lowInvader;
     public GameObject UFOInvader;
     public GameObject invaderBullet;
+    public GameObject sprinkle;
 
-    public List<List<GameObject>> invaderRows;
+    public List<List<GameObject>> invaderGrid;
     public float invaderSpeed;
     public float shootTimer;
     public float ufoTimer;
+    public float sprinkleTimer;
+    public float sprinkleInterval;
+    public List<int> emptyCols = new List<int>();
     public float shootInterval;
     public float ufoInterval;
     public float ufoSpeed;
@@ -39,12 +43,14 @@ public class InvaderController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        invaderSpeed = 0.005f;
+        invaderSpeed = 0.001f;
         shootTimer = 0;
         shootInterval = 3.0f;
         ufoTimer = 0;
         ufoInterval = 5.0f;
         ufoSpeed = 0.04f;
+        sprinkleTimer = 0;
+        sprinkleInterval = 5.0f;
         isGoingRight = true;
         numRows = 5;
         numCols = 11;
@@ -53,7 +59,7 @@ public class InvaderController : MonoBehaviour
         globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
 
         // initialize array of rows, with each row containing an invader
-        invaderRows = new List<List<GameObject>>();
+        invaderGrid = new List<List<GameObject>>();
 
         
         rowSpace = Math.Abs(spawnEnd.z - spawnStart.z) / numRows;
@@ -73,6 +79,7 @@ public class InvaderController : MonoBehaviour
                                                         new Vector3(xPos, spawnStart.y, zPos),
                                                         Quaternion.AngleAxis(90, new Vector3(1, 0, 0)) * Quaternion.AngleAxis(180, new Vector3(0, 1, 0)));
                     myNewHighInvader.GetComponent<HighInvader>().setRow(row);
+                    myNewHighInvader.GetComponent<HighInvader>().setCol(col);
                     myNewHighInvader.transform.parent = gameObject.transform;
                     invadersInRow.Add(myNewHighInvader);
                 }
@@ -83,6 +90,7 @@ public class InvaderController : MonoBehaviour
                                                         Quaternion.AngleAxis(90, new Vector3(1, 0, 0)) * Quaternion.AngleAxis(180, new Vector3(0, 1, 0)));
                     myNewMidInvader.transform.parent = gameObject.transform;
                     myNewMidInvader.GetComponent<MidInvader>().setRow(row);
+                    myNewMidInvader.GetComponent<MidInvader>().setCol(col);
                     invadersInRow.Add(myNewMidInvader);
                 }
 
@@ -92,10 +100,11 @@ public class InvaderController : MonoBehaviour
                                                         Quaternion.AngleAxis(90, new Vector3(1, 0, 0)) * Quaternion.AngleAxis(180, new Vector3(0, 1, 0)));
                     myNewLowInvader.transform.parent = gameObject.transform;
                     myNewLowInvader.GetComponent<LowInvader>().setRow(row);
+                    myNewLowInvader.GetComponent<LowInvader>().setCol(col);
                     invadersInRow.Add(myNewLowInvader);
                 }
             }
-            invaderRows.Add(invadersInRow);
+            invaderGrid.Add(invadersInRow);
         }
     }
 
@@ -106,7 +115,6 @@ public class InvaderController : MonoBehaviour
         Vector3 invaderControllerPos = gameObject.transform.position;
         UnityEngine.Bounds boxBounds = boundingBox.GetComponent<BoxCollider>().bounds;
         float spawnHalfWidth = Math.Abs(spawnEnd.x - spawnStart.x) / 2.0f;
-        Debug.Log(invaderSpeed);
 
         if (invaderControllerPos.x + spawnHalfWidth > boxBounds.max.x || invaderControllerPos.x - spawnHalfWidth < boxBounds.min.x) {
             invaderSpeed = -invaderSpeed;
@@ -115,23 +123,23 @@ public class InvaderController : MonoBehaviour
         gameObject.transform.Translate(invaderSpeed, 0, 0);
 
         // Remove invaders that have been destroyed
-        for (int i = 0; i < invaderRows.Count(); i++) {
-            for (int j = 0; j < invaderRows[i].Count(); j++) {
-                if (invaderRows[i][j] == null) {
-                    invaderRows[i].Remove(invaderRows[i][j]);
-                }
-            }
-        }
+        // for (int i = 0; i < invaderGrid.Count(); i++) {
+        //     for (int j = 0; j < invaderGrid[i].Count(); j++) {
+        //         if (invaderGrid[i][j] == null) {
+        //             invaderGrid[i].Remove(invaderGrid[i][j]);
+        //         }
+        //     }
+        // }
 
         // Invaders in the bottom row shoot at a specified interval
         shootTimer += Time.deltaTime;
         var rand = new System.Random();
         if (shootTimer > shootInterval) {
             shootTimer = 0;
-            int lastRow = invaderRows.Count() - 1;
+            int lastRow = invaderGrid.Count() - 1;
             // Randomly choose one invader from the last row to shoot
-            int randomInvader = rand.Next(invaderRows[lastRow].Count);
-            invaderRows[lastRow][randomInvader].GetComponent<Invader>().Shoot(invaderBullet);
+            int randomInvader = rand.Next(invaderGrid[lastRow].Count);
+            invaderGrid[lastRow][randomInvader].GetComponent<Invader>().Shoot(invaderBullet);
         }
 
         // Every frame, there is a small probability that the UFO will appear
@@ -158,10 +166,53 @@ public class InvaderController : MonoBehaviour
                 
             }
         }
-        // Player wins if all invaders are eliminated
-        if (invaderRows.Count() == 0) {
+        // Player wins if all invaders are dead
+
+        if (isGridEmpty()) {
             globalScript.win();
         }
+
+        // If column is empty, then spawn sprinkles
+        for (int col = 0; col < numCols; col++) {
+            if (isColumnEmpty(col) && !emptyCols.Contains(col)) {
+                spawnSprinkles();
+                emptyCols.Add(col);
+            }
+        }
+        
+    }
+
+    void spawnSprinkles() {
+        Vector3 invaderControlPos = gameObject.transform.position;
+        float spawnHalfWidth = Math.Abs(spawnEnd.x - spawnStart.x) / 2.0f;
+        for (int i = 0; i < 100; i++) {
+            Vector3 sprinklePos = new Vector3(  UnityEngine.Random.Range(invaderControlPos.x - spawnHalfWidth, invaderControlPos.x + spawnHalfWidth) * 1.3f,
+                                                invaderControlPos.y,
+                                                UnityEngine.Random.Range(15f - 2f, 15f + 2f));
+            Instantiate( sprinkle,
+                    sprinklePos,
+                    Quaternion.AngleAxis(0, new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f))));
+        }
+    }
+
+    bool isColumnEmpty(int col) {
+        for (int i = 0; i < invaderGrid.Count(); i++) {
+            if (invaderGrid[i][col].GetComponent<Invader>().isAlive) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool isGridEmpty() {
+        for (int row = 0; row < numRows; row++) {
+            for (int col = 0; col < numCols; col++) {
+                if (invaderGrid[row][col].GetComponent<Invader>().isAlive) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private void OnDrawGizmos()

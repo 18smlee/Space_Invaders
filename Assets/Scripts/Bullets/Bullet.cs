@@ -8,20 +8,13 @@ public class Bullet : MonoBehaviour
     public Quaternion heading;
     public GameObject cam;
     public Global globalScript;
-    
-    // void OnTriggerEnter(Collider collider) {
-    //     // Debug.Log("Bullet hits floor trigger");
-    //     if (collider.CompareTag("FloorTrigger"))
-    //     {
-    //         thrust = new Vector3(0.0f, 0.0f, 0.0f);
-    //         Die();
-    //     }
-    // }
+    public Ship ship;
+
     public virtual void OnCollisionEnter(Collision collision) 
     {
-        Debug.Log(isActive);
         Collider collider = collision.collider;
-        if (isActive) {
+        if (isActive) 
+        {
             if (collider.CompareTag("Ship"))
             {
                 Ship ship = collider.gameObject.GetComponent<Ship>();
@@ -32,7 +25,6 @@ public class Bullet : MonoBehaviour
             else if (collider.CompareTag("Invader"))
             {
                 Debug.Log("Bullet hits an invader");
-                // Die();
                 Invader invader = collider.gameObject.GetComponent<Invader>();
                 invader.Die();
                 gameObject.GetComponent<Rigidbody>().useGravity = true;
@@ -50,19 +42,16 @@ public class Bullet : MonoBehaviour
             else if (collider.CompareTag("Ceiling")) {
                 Die();
             }
-            else
+        
+        // if the bullet is dead
+        } else {
+            if (collider.CompareTag("Ship"))
             {
-                // if we collided with something else, print to console
-                // what the other thing was
-                // Debug.Log("Collided with " + collider.tag);
+                Debug.Log("ship has collected a bullet " + gameObject.name);
+                ship.bulletQueue.Add(gameObject.name);
+                Destroy(gameObject);
             }
         }
-                    else
-            {
-                // if we collided with something else, print to console
-                // what the other thing was
-                Debug.Log("Collided with " + collider.tag);
-            }
     }
 
     // Use this for initialization
@@ -71,6 +60,7 @@ public class Bullet : MonoBehaviour
         isActive = true;
         hasHitInvader = false;
         globalScript = GameObject.Find("GlobalObject").GetComponent<Global>();
+        ship = GameObject.Find("vehicle_playerShip").GetComponent<Ship>();
         // travel straight in the z-axis
         thrust.z = 1500.0f;
         // do not passively decelerate
@@ -86,7 +76,6 @@ public class Bullet : MonoBehaviour
     {}
 
     public virtual void Die() {
-        Debug.Log("Bullet dies");
         isActive = false;
         gameObject.GetComponent<Rigidbody>().useGravity = true;
     }

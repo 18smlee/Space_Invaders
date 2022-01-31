@@ -14,6 +14,7 @@ TagManager:
   - Floor
   - Ceiling
   - FloorTrigger
+  - Sprinkle
   layers:
   - Default
   - TransparentFX

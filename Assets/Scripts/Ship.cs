@@ -13,6 +13,8 @@ public class Ship : MonoBehaviour
     public GameObject deathExplosion;
     public AudioClip deathKnell;
     public AudioClip shootFX;
+
+    public List<string> bulletQueue;
     // Use this for initialization
     void Start()
     {
@@ -20,6 +22,7 @@ public class Ship : MonoBehaviour
         shootInterval = 0.5f;
         timer = 0.0f;
         boundingBox = GameObject.Find("BoundingBox");
+        bulletQueue = new List<string>();
     }
     
     void Update()
@@ -48,18 +51,53 @@ public class Ship : MonoBehaviour
         {
             if (timer > shootInterval) {
                 timer = 0;
-                AudioSource.PlayClipAtPoint(shootFX, gameObject.transform.position);
-                Vector3 spawnPos = gameObject.transform.position + new Vector3(0, 0, 1.1f);
-                GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
-                Bullet b = obj.GetComponent<Bullet>();
-                Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
-                b.heading = rot;
+                if (bulletQueue.Count > 0) {
+                    string bulletName = bulletQueue[bulletQueue.Count - 1];
+                    GameObject bulletFromQueue = GameObject.Find(bulletName);
+                    ShootTwo(bullet, bulletFromQueue);
+                    bulletQueue.Remove(bulletName);
+                } else {
+                    Shoot(bullet);
+                }
             }
         }
+    }
+
+    public void Shoot(GameObject bullet) {
+        AudioSource.PlayClipAtPoint(shootFX, gameObject.transform.position);
+        Vector3 spawnPos = gameObject.transform.position + new Vector3(0, 0, 1.1f);
+        GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
+        Bullet b = obj.GetComponent<Bullet>();
+        Quaternion rot = Quaternion.Euler(new Vector3(0, rotation, 0));
+        b.heading = rot;
+    }
+
+    public void ShootTwo(GameObject bulletL, GameObject bulletR)
+    {
+        AudioSource.PlayClipAtPoint(shootFX, gameObject.transform.position);
+        Vector3 spawnPosL = gameObject.transform.position + new Vector3(-0.5f, 0, 1.1f);
+        GameObject objL = Instantiate(bullet, spawnPosL, Quaternion.identity) as GameObject;
+        Bullet bL = objL.GetComponent<Bullet>();
+        bL.heading = Quaternion.Euler(new Vector3(0, rotation, 0));
+
+        Vector3 spawnPosR = gameObject.transform.position + new Vector3(0.5f, 0, 1.1f);
+        GameObject objR = Instantiate(bullet, spawnPosR, Quaternion.identity) as GameObject;
+        Bullet bR = objL.GetComponent<Bullet>();
+        bR.heading = Quaternion.Euler(new Vector3(0, rotation, 0));
     }
 
     public void getsHit() {
         AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
         Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
     }
+
+    // public void OnCollisionEnter(Collision collision) 
+    // {
+    //     Debug.Log("Ship hit something");
+    //     Collider collider = collision.collider;
+    //     if (collider.CompareTag("Sprinkle")) {
+    //         Sprinkle sprinkle = collider.gameObject.GetComponent<Sprinkle>();
+    //         sprinkle.Die();
+    //     }
+    // }
 }

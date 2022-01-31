@@ -112,12 +112,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointValue: 20
   row: 0
+  col: 0
   rotation: 0
   isAlive: 0
   deathExplosion: {fileID: 3460713223719996648, guid: 94ba570385b44b64db5fe594b29ded84,
     type: 3}
   deathKnell: {fileID: 8300000, guid: d3dd317a0d3297b49a6e600990bbefc9, type: 3}
-  bullet: {fileID: 7827519291156076616, guid: 6b70593691d60c94e9665b7bd8868d26, type: 3}
   globalScript: {fileID: 0}
   invaderControllerScript: {fileID: 0}
 --- !u!54 &6915729814393022750
@@ -128,7 +128,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3574244719826037327}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0

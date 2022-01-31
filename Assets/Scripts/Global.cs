@@ -10,6 +10,7 @@ public class Global : MonoBehaviour
     public GameObject canvas;
     public GameObject heart;
     List<GameObject> heartList;
+    
 
     // Use this for initialization
     void Start()
@@ -56,10 +57,7 @@ public class Global : MonoBehaviour
         // camera shake
         CameraShake camShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         StartCoroutine(camShake.Shake(0.15f, 0.4f));
-        Debug.Log(heartList.Count);
         Destroy(heartList[heartList.Count - 1]);
-        // heartList.RemoveAt(heartList.Count - 1);
-        Debug.Log(heartList[2]);
     }
 
     public void updateHiScore() {

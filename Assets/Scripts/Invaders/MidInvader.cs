@@ -21,4 +21,8 @@ public class MidInvader : Invader
     {
         base.setRow(rowIn);
     }
+    public override void setCol(int colIn)
+    {
+        base.setCol(colIn);
+    }
 }
